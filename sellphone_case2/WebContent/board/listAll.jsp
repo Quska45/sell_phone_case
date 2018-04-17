@@ -15,6 +15,8 @@ $(document).ready(function() {
 		location.href = "boardinsertview.bizpoll";
 	});	
 });
+
+
 </script>
 
 <section class="content">
@@ -51,7 +53,12 @@ $(document).ready(function() {
 					</table>
 					
 					<button type="submit" class="btn btn-primary">게시글 등록</button>
-					
+					<div>
+						<form action="boardsearch.bizpoll" name="replyinsert" method="POST">
+							<input id="search_input" name="search_input" type="text" placeholder="입력하시오">
+							<button type="submit" id="search_btn">검색</button>
+						</form>
+					</div>
 					<div class="board_pagenation">
 						<ul class="pagination">
 						

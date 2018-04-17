@@ -131,6 +131,24 @@
 		WHERE rno = #{rno}
 	</delete>
 	
+	<select id="boardSearch" resultType="boardDTO" parameterType="criteriaDTO">
+		<![CDATA[
+			SELECT *
+			FROM (
+				SELECT rownum rnum,
+				a.*
+				FROM (
+					SELECT *
+					FROM tblboard
+					WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%'
+					ORDER BY bno desc
+				) a
+			)
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}
+		]]>
+	</select>
+	
+	
 </mapper>
 
 

@@ -189,6 +189,34 @@ public class BoardDAO {
 			}
 		}
 		
+		
+		public List<BoardDTO> boardSearch(CriteriaDTO criDto){
+			sqlSession = sqlSessionFactory.openSession();
+			List<BoardDTO> list = null;
+			try {
+				sqlSession.selectList("boardSearch", criDto);
+				
+				for(BoardDTO bDto : list) {
+					System.out.print(bDto.getBno()+", ");
+					System.out.print(bDto.getTitle()+", ");
+					System.out.print(bDto.getContents()+", ");
+					System.out.print(bDto.getwriter()+", ");
+					System.out.print(bDto.getregdate()+", ");
+					System.out.print(bDto.getViewcnt()+", ");
+					System.out.println();
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			
+			return list;
+		}
+		
 }
 
 

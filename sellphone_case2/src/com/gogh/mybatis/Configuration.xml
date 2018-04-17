@@ -16,6 +16,7 @@
 		<typeAlias type="com.gogh.DTO.MemberDTO" alias="memDTO"/>
 		<typeAlias type="com.gogh.DTO.BoardDTO" alias="boardDTO"/>
 		<typeAlias type="com.gogh.DTO.ReplyDTO" alias="ReplyDTO"/>
+		<typeAlias type="com.gogh.DTO.CriteriaDTO" alias="criteriaDTO"/>
 	</typeAliases>
 	
 

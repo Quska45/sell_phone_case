@@ -91,10 +91,15 @@ a {
 
 .allButton a {
 	text-align: center;
-	border:
+	border: 1px solid black;
 }
 
 </style>
+<script src="/js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+</script>
+
 </head>
 <body>
 <div id="page1">
@@ -126,9 +131,9 @@ a {
 					</tbody>
 				</table>
 				<div class="allButton">
-					<a class="bbr_modify" href="#"></a>
-					<a class="bbr_remove" href="#"></a>
-					<a class="bbr_LIST ALL" href="#"></a>
+					<a class="bbr_modify" href="#">수정</a>
+					<a class="bbr_remove" href="#">삭제</a>
+					<a class="bbr_LIST ALL" href="#">등록</a>
 				</div>
 			</div>
 		</div>

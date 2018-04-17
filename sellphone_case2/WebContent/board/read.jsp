@@ -30,8 +30,8 @@ $(document).ready(function() {
 });
 
 
-$(document).on("click", "#reply_del", function(){
-	var rno = $("#input_rno").val();
+$(document).on("click", ".reply_del", function(){
+	var rno = $(this).attr("data_num");
 	alert(rno);
 	$.ajax({
 		url: "replydelete.bizpoll",
@@ -40,6 +40,7 @@ $(document).on("click", "#reply_del", function(){
 		data: "rno=" + rno,
 		success: (function(data){
 				alert("댓글 삭제 성공");
+				location.reload();
 		}),
 		error: function(){
 			alert("system error");
@@ -47,6 +48,7 @@ $(document).on("click", "#reply_del", function(){
 	});
 	
 });
+
 </script>
 <!-- Main Content -->
 <section class="content">
@@ -94,21 +96,26 @@ $(document).on("click", "#reply_del", function(){
               				댓글 
               					<span id="comment_count">${replycount}</span>
               				</div>
-					<form action="replyinsert.bizpoll" name="replyinsert" method="POST">
-	              				<c:forEach items="${replyview}" var="replyview">
+	              				
+					<c:forEach items="${replyview}" var="replyview">
 							<div style="margin-bottom: 30px;">
 								<span id="comment_writer">${replyview.writer}</span>
 								<c:if test="${sessionScope.loginUser.mname == replyview.writer}">
-									<input type="hidden" value="${replyview.rno}" id="input_rno" name="input_rno">
-									<span><a href="#" id="reply_del" style="float:right; margin-left: 10px;">삭제</a></span>
+									<!-- data_num은 원래 정의되어 있는 속성이 아니라 ajax 에서 this를 이용해 값을 가져오기 위해 임의로 만든 것 -->
+									<a href="#" type="button"  class="reply_del" data_num="${replyview.rno}">삭제</a>
+									<%-- <input type="hidden" value="${replyview.rno}" id="input_rno" name="input_rno">
+									<span><a href="#" id="reply_del" style="float:right; margin-left: 10px;">삭제</a></span> --%>
 								</c:if>
 								<span id="comment_date" style="float: right;">${replyview.regdate}</span>
 								<textarea name="comment_input_content" id="comment_input_content" style="display: block; width:100%" readonly="readonly">${replyview.content}</textarea>
-								<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${replyview.bno}">
 							</div>			
-						</c:forEach>
+					</c:forEach>
+						
 					
-					
+					<form action="replyinsert.bizpoll" name="replyinsert" method="POST">
+					<c:forEach items="${replyview}" var="replyview">
+						<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${replyview.bno}">
+					</c:forEach>
 		              			<c:choose>
 							<c:when test="${empty sessionScope.loginUser}">
 								<div style="margin-top: 20px;"><a href="index.bizpoll">로그인</a>
@@ -121,12 +128,11 @@ $(document).on("click", "#reply_del", function(){
 									<span id="comment_date" style="float: right">작성일자</span>
 									<textarea name="comment_input_write" id="comment_input_write" placeholder="댓글을 입력하세요" style="display: block; width:100%"></textarea>
 									
-									<button type="submit">댓글 등록</button>
+									<input type="submit" value="댓글등록">
 								</div>		
 							</c:otherwise>
 						</c:choose>
 					</form>
-					
 				</div>
 				
 			</div>

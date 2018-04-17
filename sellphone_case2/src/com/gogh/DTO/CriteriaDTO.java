@@ -4,8 +4,20 @@ package com.gogh.DTO;
 public class CriteriaDTO {
 	private int page;	//페이지번호(하단의 번호들 클릭)
 	private int perPageNum;	//한 페이지에 보여줄 게시글 수
+	private String keyword;
 	
 	
+	
+	
+	public CriteriaDTO(int page, int perPageNum, String keyword) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.keyword = keyword;
+	}
+
+
+
 	public CriteriaDTO() {
 		// TODO Auto-generated constructor stub
 		//페이지가 뜨는 것의 기본은 1페이지기 때문에 1을 넣어줌
@@ -46,6 +58,18 @@ public class CriteriaDTO {
 
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
+	}
+
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 	
