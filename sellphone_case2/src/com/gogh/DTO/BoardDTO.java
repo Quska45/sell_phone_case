@@ -10,11 +10,21 @@ public class BoardDTO {
 	//날짜만 받고 싶으면 sql로 임폴트하고 시간까지 받고 싶으면 util로 임폴트한다.
 	private Date regdate;
 	private int viewcnt;
+	private int goodcnt;
+	private int replycnt;
 	
 	public BoardDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public int getReplycnt() {
+		return replycnt;
+	}
+
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
+
 	public BoardDTO(int bno, String title, String contents) {
 		super();
 		this.bno = bno;

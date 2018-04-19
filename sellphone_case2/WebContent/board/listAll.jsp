@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp" %>
@@ -14,6 +19,7 @@ $(document).ready(function() {
 		alert("게시글 등록 버튼 잘 눌림");
 		location.href = "boardinsertview.bizpoll";
 	});	
+	
 });
 
 
@@ -44,19 +50,51 @@ $(document).ready(function() {
 						  <c:forEach items="${boardlist}" var="bDto">
 							  <tr>
 							  	<td>${bDto.bno}</td>
-							  	<td><a href="boarddetail.bizpoll?bno=${bDto.bno}">${bDto.title}</a></td>
+							  	<td><a href="boarddetail.bizpoll?bno=${bDto.bno}">${bDto.title}</a><td>${bDto.replycnt}<td></td>
 							  	<td>${bDto.writer}</td>
-							  	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${bDto.regdate}"/></td>
+							  	<td>
+							  	<fmt:formatDate value="${today}" pattern="yyyy-mm-dd" var="today2"/>
+							  	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-mm-dd" var="regdate2"/>
+								
+								<c:choose>
+									<c:when test="${today2 == regdate2}">
+										<td><fmt:formatDate pattern="HH:mm:ss" value="${bDto.regdate}"/></td>
+									</c:when>
+									<c:otherwise>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}"/></td>
+									</c:otherwise>
+								</c:choose>
+	
 							  	<td>${bDto.viewcnt}</td>
 						  </tr>
 						  </c:forEach>
 					</table>
 					
 					<button type="submit" class="btn btn-primary">게시글 등록</button>
+					
 					<div>
 						<form action="boardsearch.bizpoll" name="replyinsert" method="POST">
-							<input id="search_input" name="search_input" type="text" placeholder="입력하시오">
-							<button type="submit" id="search_btn">검색</button>
+							<input type="hidden" value="${boardlistSize}" id="boardlistSizeInput">							
+							
+							
+							<c:if test="${!empty searchKeyword}">
+								<c:if test="${boardlistSize==0}">
+									<span id="listNoneSpan">조회된 건수가 0입니다.</span>
+								</c:if>
+								<c:if test="${boardlistSize!=0}">
+									<span>조회된 건 수 : ${boardlistSize}</span>
+								</c:if>
+							</c:if>
+							
+							<select id="selsearch" name="selsearch" style="height: 25px;">
+	                                                            	<option value="1">-조건 선택-</option>
+	                                                            	<option value="2">제목</option>
+	                                                            	<option value="3">내용</option>
+	                                                            	<option value="4">제목+내용(다음카카오)</option>
+	                                                            	<option value="5">작성자</option>
+	                                                 </select>
+								<input id="search_input" name="search_input" type="text" placeholder="입력하시오">
+								<button type="submit" id="search_btn">검색</button>
 						</form>
 					</div>
 					<div class="board_pagenation">

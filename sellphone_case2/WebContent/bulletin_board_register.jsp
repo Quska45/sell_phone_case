@@ -92,6 +92,11 @@ a {
 .allButton a {
 	text-align: center;
 	border: 1px solid black;
+	padding: 5px;
+}
+
+.allButton {
+	margin-top: 30px;
 }
 
 </style>
@@ -108,31 +113,31 @@ a {
 				<h1 id="main_title">공지사항</h1>
 				<table class="tb1">
 					<tbody>
-						<tr>
-							<th>Title</th>
-							<td class="tb_tit">
-							 	<input type="text" id="bbp_title" name="bbp_title" placeholder="제목을 입력하세요.">
-							</td>
-						</tr>
-						
-						<tr>
-							<th>Content</th>
-							<td class="tb_tit">
-								<input type="text" id="bbp_content" name="bbp_content" placeholder="내용을 입력하세요.">
-							</td>
-						</tr>
-						
-						<tr>
-							<th>Writer</th>
-							<td class="tb_tit">
-								<input type="text" id="bbp_writer" name="bbp_writer" placeholder="글쓴이를 입력하세요.">
-							</td>
-						</tr>
+						<form role="form" action="boardinsertsave.bizpoll" method="post">
+							<tr>
+								<th>Title</th>
+								<td class="tb_tit">
+								 	<input type="text" id="bbp_title" name="bbp_title" placeholder="제목을 입력하세요.">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>Content</th>
+								<td class="tb_tit">
+									<textArea type="text" id="bbp_content" name="bbp_content" placeholder="내용을 입력하세요."></textArea>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>Writer</th>
+								<td class="tb_tit">
+									<input type="text" id="bbp_writer" name="bbp_writer" placeholder="글쓴이를 입력하세요.">
+								</td>
+							</tr>
+						<form>
 					</tbody>
 				</table>
 				<div class="allButton">
-					<a class="bbr_modify" href="#">수정</a>
-					<a class="bbr_remove" href="#">삭제</a>
 					<a class="bbr_LIST ALL" href="#">등록</a>
 				</div>
 			</div>

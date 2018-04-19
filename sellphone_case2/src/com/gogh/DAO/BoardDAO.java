@@ -70,7 +70,7 @@ public class BoardDAO {
 			try {
 				//몇건이 출력될지 출력하는 단건을 출력시키기 때문에 단건만 출력하는 것이다.
 				//즉 게시글의 건수가 여기 담기게 된다.
-				result = sqlSession.selectOne("countPaging", criDto);
+				result = sqlSession.selectOne("scountPaging", criDto);
 				
 				
 			} catch (Exception e) {
@@ -108,7 +108,7 @@ public class BoardDAO {
 		}
 		
 		
-		//게시글 목록에서 항목을 클릭하면 상세페이지가 뜨게 하는 메소드
+		//게시글 목록에서 항목을 클릭하면 페이지 내에 있는 정보를 가져오는 메소드
 		public BoardDTO boardDetailView(Integer bno){
 			
 			sqlSession = sqlSessionFactory.openSession();
@@ -194,7 +194,10 @@ public class BoardDAO {
 			sqlSession = sqlSessionFactory.openSession();
 			List<BoardDTO> list = null;
 			try {
-				sqlSession.selectList("boardSearch", criDto);
+				System.out.println("keyword=====>" + criDto.getKeyword());
+				System.out.println("flag=====>" + criDto.getFlag());
+				
+				list = sqlSession.selectList("boardSearch", criDto);
 				
 				for(BoardDTO bDto : list) {
 					System.out.print(bDto.getBno()+", ");

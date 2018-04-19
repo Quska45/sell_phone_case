@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>   
-
+<%@page import="java.util.*"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -82,10 +85,9 @@ $(document).on("click", ".reply_del", function(){
 				</div>
 				
 				<div>
-					<c:if test="${sessionScope.loginUser.mname == boardview.writer}">
+					
 						<button type="submit" class="btn btn-warning">Modify</button>
 						<button type="submit" class="btn btn-danger">Remove</button>
-					</c:if>
 						<button type="submit" class="btn btn-primary">LIST ALL</button>
 				</div>
 				
@@ -96,26 +98,28 @@ $(document).on("click", ".reply_del", function(){
               				댓글 
               					<span id="comment_count">${replycount}</span>
               				</div>
-	              				
-					<c:forEach items="${replyview}" var="replyview">
+	              			
+	              			<c:if test="${replycount != 0}">	
+						<c:forEach items="${replyview}" var="replyview">
 							<div style="margin-bottom: 30px;">
 								<span id="comment_writer">${replyview.writer}</span>
 								<c:if test="${sessionScope.loginUser.mname == replyview.writer}">
 									<!-- data_num은 원래 정의되어 있는 속성이 아니라 ajax 에서 this를 이용해 값을 가져오기 위해 임의로 만든 것 -->
-									<a href="#" type="button"  class="reply_del" data_num="${replyview.rno}">삭제</a>
+									<a href="#" class="reply_del" data_num="${replyview.rno}">삭제</a>
 									<%-- <input type="hidden" value="${replyview.rno}" id="input_rno" name="input_rno">
 									<span><a href="#" id="reply_del" style="float:right; margin-left: 10px;">삭제</a></span> --%>
 								</c:if>
 								<span id="comment_date" style="float: right;">${replyview.regdate}</span>
 								<textarea name="comment_input_content" id="comment_input_content" style="display: block; width:100%" readonly="readonly">${replyview.content}</textarea>
 							</div>			
-					</c:forEach>
-						
+						</c:forEach>
+					</c:if>	
+					<c:if test="${replycount == 0}">
+						<div>조회된 댓글이 없습니다.</div>
+					</c:if>
+					
 					
 					<form action="replyinsert.bizpoll" name="replyinsert" method="POST">
-					<c:forEach items="${replyview}" var="replyview">
-						<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${replyview.bno}">
-					</c:forEach>
 		              			<c:choose>
 							<c:when test="${empty sessionScope.loginUser}">
 								<div style="margin-top: 20px;"><a href="index.bizpoll">로그인</a>
@@ -127,7 +131,7 @@ $(document).on("click", ".reply_del", function(){
 									<span id="comment_name" name="comment_name">${sessionScope.loginUser.mname}</span>
 									<span id="comment_date" style="float: right">작성일자</span>
 									<textarea name="comment_input_write" id="comment_input_write" placeholder="댓글을 입력하세요" style="display: block; width:100%"></textarea>
-									
+									<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${boardview.bno}">
 									<input type="submit" value="댓글등록">
 								</div>		
 							</c:otherwise>

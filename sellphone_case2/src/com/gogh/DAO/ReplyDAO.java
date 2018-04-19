@@ -28,7 +28,7 @@ public class ReplyDAO {
 			int result = 0;
 			
 			
-			//댓글을 불러와서 띄워주는 함수
+			//댓글에 대한 정보를 가져오는 함수
 			public List<ReplyDTO> replySelect(Integer bno) {
 				sqlSession = sqlSessionFactory.openSession();
 				List<ReplyDTO> list = null;
@@ -83,6 +83,27 @@ public class ReplyDAO {
 					sqlSession.close();
 				}
 				
+			}
+			
+			public int replyDeleteAll(Integer bno) {
+				sqlSession = sqlSessionFactory.openSession();
+				try {
+					result = sqlSession.delete("replydeleteall", bno);
+					sqlSession.commit();
+					
+					if(result > 0) {
+						System.out.println("댓글 삭제 성공");
+					} else {
+						System.out.println("댓글 삭제 실패");
+					}
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				} finally {
+					sqlSession.close();
+				}
+				return result;
 			}
 		
 			

@@ -38,11 +38,13 @@ public class BoardDetailAction implements Action{
 		//상세 게시글 댓글 출력
 		ReplyDAO rDao = ReplyDAO.getInstance();
 		List<ReplyDTO> list = rDao.replySelect(bno);
+		//댓글의 writer
 		request.setAttribute("replyview", list);
 		
 		request.setAttribute("boardview", bDto);
 		
 		int replyCount = list.size();
+		System.out.println("댓글의 숫자" + replyCount);
 		
 		request.setAttribute("replycount", replyCount);
 		

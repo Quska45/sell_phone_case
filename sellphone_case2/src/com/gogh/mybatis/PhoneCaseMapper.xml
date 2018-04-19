@@ -53,7 +53,7 @@
 		VALUES(seq_tblboard_bno.nextval,#{title}, #{contents}, #{writer})
 	</insert>
 	
-	<!-- 게시글 목록에서 보고 싶은 글을 클릭하면 상세페이지가 뜬다. -->
+	<!-- 게시글 목록에서 보고 싶은 글을 클릭하면 상세페이지의 정보를 가져오는 sql문 -->
 	<select id="boarddetailview" resultType="boardDTO" parameterType="Integer">
 		SELECT *
 		FROM tblboard
@@ -75,6 +75,7 @@
 	</delete>
 	
 	
+	
 	<!--  -->
 	<!-- CDATA를 쓰는 이유는 sql에서 사용하는 부등호를 xml에서 쓰면 태그에 사용되는 꺽쇠(텍스트)로 인식 되기 때문에 꼭서줘야 한다. -->
 	<select id="countPaging" resultType="int">
@@ -85,17 +86,41 @@
 		]]>
 	</select>
 	
+	<!-- 내가 키워드 넣은 것이 들어 있는 것을 가져올 수 있도록 하는 것이다. -->
+	<select id="scountPaging"  resultType="int">
+		<![CDATA[
+			SELECT count(bno)
+			FROM tblboard]]>
+			<if test='flag == "1"'>
+				<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test='flag == "2"'>
+				<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test='flag == "3"'>
+				<![CDATA[WHERE bno > 0 AND contents LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test='flag == "4"'>
+				<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%']]>
+			</if>
+			<if test='flag == "5"'>
+				<![CDATA[WHERE bno > 0 AND writer LIKE '%'||#{keyword}||'%']]>
+			</if>
+		
+	</select>
 	
 	<!-- 게시글을 10개만 띄워주는 기능을 하는 sql -->
-	<select id="listCriteria" resultType="boardDTO">
+	<select id="listCriteria" parameterType="criteriaDTO" resultType="boardDTO">
 		<![CDATA[
 			SELECT *
 			FROM (
 				SELECT rownum rnum,
 				a.*
 				FROM (
-					SELECT *
-					FROM tblboard
+					SELECT b.*, (SELECT COUNT(*)
+							FROM tblreply d
+							WHERE b.bno = d.bno) replycnt
+					FROM tblboard b
 					WHERE bno > 0
 					ORDER BY bno desc
 				) a
@@ -105,7 +130,7 @@
 	</select>
 	
 	
-	<!-- 게시글을 클릭하면 조회수가 증가함 -->
+	<!-- 게시글을 클릭하면 조회수가 증가할 수 있도록 하는 sql문이다. -->
 	<update id="boardViewCnt">
 		UPDATE tblboard
 		SET viewcnt = viewcnt+1
@@ -131,6 +156,12 @@
 		WHERE rno = #{rno}
 	</delete>
 	
+	<delete id="replydeleteall" parameterType="Integer">
+		DELETE FROM tblreply
+		WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 검색을 하게 해주는 쿼리문 -->
 	<select id="boardSearch" resultType="boardDTO" parameterType="criteriaDTO">
 		<![CDATA[
 			SELECT *
@@ -139,13 +170,27 @@
 				a.*
 				FROM (
 					SELECT *
-					FROM tblboard
-					WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%'
+					FROM tblboard]]>
+					<if test='flag == "1"'>
+						<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='flag == "2"'>
+						<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='flag == "3"'>
+						<![CDATA[WHERE bno > 0 AND contents LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='flag == "4"'>
+						<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR contents LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='flag == "5"'>
+						<![CDATA[WHERE bno > 0 AND writer LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<![CDATA[
 					ORDER BY bno desc
 				) a
 			)
-			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}
-		]]>
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}]]>
 	</select>
 	
 	

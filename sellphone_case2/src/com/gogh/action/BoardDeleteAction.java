@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gogh.DAO.BoardDAO;
+import com.gogh.DAO.ReplyDAO;
 
 public class BoardDeleteAction implements Action {
 
@@ -22,8 +23,18 @@ public class BoardDeleteAction implements Action {
 		BoardDAO bDao = BoardDAO.getInstance();
 		int result = bDao.boardDelete(bno);
 		
+		
+		
 		if(result > 0){
 			System.out.println("삭제성공");
+			
+			ReplyDAO rDao = ReplyDAO.getInstance();
+			int result2 = rDao.replyDeleteAll(bno);
+			if(result2>0) {
+				System.out.println("댓글 삭제 성공");
+			} else {
+				System.out.println("댓글 삭제 실패");
+			}
 			url = "boardlist.bizpoll";
 		} else {
 			url = "index.bizpoll";

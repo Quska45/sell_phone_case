@@ -5,10 +5,20 @@ public class CriteriaDTO {
 	private int page;	//페이지번호(하단의 번호들 클릭)
 	private int perPageNum;	//한 페이지에 보여줄 게시글 수
 	private String keyword;
+	private String flag;
 	
 	
 	
-	
+	public String getFlag() {
+		return flag;
+	}
+
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+
 	public CriteriaDTO(int page, int perPageNum, String keyword) {
 		super();
 		this.page = page;
@@ -17,7 +27,7 @@ public class CriteriaDTO {
 	}
 
 
-
+	//CriteriaDTO의 매개변수없는 생성자가 생성되면 이게 기본으로 실행된다.
 	public CriteriaDTO() {
 		// TODO Auto-generated constructor stub
 		//페이지가 뜨는 것의 기본은 1페이지기 때문에 1을 넣어줌

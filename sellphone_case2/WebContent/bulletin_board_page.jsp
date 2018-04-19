@@ -1,6 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+    <%@page import="java.util.*"%>
+<%
+ 
+    request.setCharacterEncoding("UTF-8");
+ 
+%>
+
+    
 <%@ include file="header.jsp" %>    
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -127,37 +137,36 @@ a {
 					<tbody>
 						<tr>
 							<td>
-								<div id="bd_title">첫 번째 게시글의 제목 입니다.</div>
-								<div id="bd_date">2018-04-10</div>
-								<div id="bd_author">변광진</div>
+								<div id="bd_title">${boardview.title}</div>
+								<div id="bd_date">${boardview.regdate}</div>
+								<div id="bd_author">${boardview.writer}</div>
 							</td>	
 						</tr>
 							<td>
 								<div class="bd_con">
-									<p>
-									안녕하세요. 첫 번째 게시글입니다.
-									</p>
+									<p>${boardview.contents}</p>
 								</div>
 							</td>
 						<tr>
-							
 						</tr>
 					</tbody>
 				</table>
 				
 				<div class="reply_list" style="margin-top: 30px;">
 					<div class="reply_item">
-						<div class="comment_list">
-							<ul>	
-								<li>
-									<span>변광진</span>
-									<span>2018-04-10</span>
-									
-								</li>
-								<li>댓글 입니다.
-								</li>
-							</ul>
-						</div>
+						<c:forEach items="${replyview}" var="replyview">
+							<div class="comment_list">
+								<ul>	
+									<li>
+										<span>${replyview.writer}</span>
+										<span>${replyview.regdate}</span>
+										<a href="" class="relpy_del" data_num="${replyview.rno}">삭제</a>
+									</li>
+									<li>${replyview.content}
+									</li>
+								</ul>
+							</div>
+						</c:forEach>
 						<textarea id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
 						<a href="#" id="comment_insert">입력</a>
 					</div>

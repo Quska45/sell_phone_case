@@ -43,14 +43,19 @@ public class BoardListAction2 implements Action{
 		
 		//화면 아래 인덱스 버튼들을 의미한다. 
 		PageMakerDTO pageMaker = new PageMakerDTO();
+		
 		//PageMaker에 페이지 번호와 한 화면에 보여질 게시글의 수를 넣어준다.
 		pageMaker.setCriDto(criDto);
+		
 		//여기에 전체 게시글의 건수가 담기게 된다. 맵퍼에 있는 sql문을 통해 10건이 담기게 된다.
 		int result = bDao.totalCount(criDto);
+		
 		//총 게시글의 수가 담긴 result변수를 pagemaker에 담아주도록 한다.
 		pageMaker.setTotalCount(result);
+		
 		//게시글 건수가 제대로 담겨있는지 확인하는 출력문
 		System.out.println("게시글 전체" + pageMaker.getTotalCount());
+		
 		//pagemaker를 보내준다.
 		request.setAttribute("pageMaker", pageMaker);
 		
