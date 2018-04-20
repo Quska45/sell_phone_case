@@ -179,7 +179,25 @@ public class MemberDAO {
 			return mDtoLogin;
 		}
 	
-	
+		public MemberDTO loginCheck(String mid, String mpw) {
+			List<MemberDTO> list = null;
+			sqlSession = sqlSessionFactory.openSession();
+			MemberDTO mDto = null;
+			try {
+				//id, pw
+				mDto = new MemberDTO(mid, mpw);
+				//모든 정보를 가지고 있음
+				mDto = sqlSession.selectOne("logincheck", mDto);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			return mDto;
+		}
 	
 	
 	

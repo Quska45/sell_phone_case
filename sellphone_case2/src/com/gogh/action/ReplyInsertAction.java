@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.gogh.DAO.ReplyDAO;
 import com.gogh.DTO.MemberDTO;
 import com.gogh.DTO.ReplyDTO;
@@ -23,8 +25,8 @@ public class ReplyInsertAction implements Action{
 		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
 		
 		String writer= loginUser.getMname();
-		String content = request.getParameter("comment_input_write");
-		Integer bno = Integer.parseInt(request.getParameter("comment_input_bno"));
+		String content = request.getParameter("content");
+		Integer bno = Integer.parseInt(request.getParameter("bno"));
 		
 		String url="boarddetail.bizpoll?bno="+bno;
 		System.out.println("writer" + writer + "content" + content + "bno" + bno);
@@ -40,12 +42,17 @@ public class ReplyInsertAction implements Action{
 		}
 		
 		request.setAttribute("bno", bno);
-		ActionForward forward = new ActionForward();
 		
-		forward.setPath(url);
-		forward.setRedirect(false);
+		//0이면 등록이 된 것이다.
+		int flag=0;
 		
-		return forward;
+		JSONObject jObj = new JSONObject();
+		jObj.put("flag", flag); //디비에서 받아온 0 이나 1이 담기게 되는 것이다.
+
+		response.setContentType("application/x-json; charset=UTF-8");
+		response.getWriter().println(jObj);
+		
+		return null;
 	}
 
 }

@@ -15,6 +15,7 @@ import com.gogh.action.BoardDeleteAction;
 import com.gogh.action.BoardDetailAction;
 import com.gogh.action.BoardDetailAction2;
 import com.gogh.action.BoardInsertSaveAction;
+import com.gogh.action.BoardInsertSaveAction2;
 import com.gogh.action.BoardInsertViewAction;
 import com.gogh.action.BoardInsertViewAction2;
 import com.gogh.action.BoardListAction;
@@ -22,6 +23,7 @@ import com.gogh.action.BoardListAction2;
 import com.gogh.action.BoardSearchAction;
 import com.gogh.action.BoardUpdateSaveAction;
 import com.gogh.action.BoardUpdateViewAction;
+import com.gogh.action.CommentListAction;
 import com.gogh.action.ConstractAction;
 import com.gogh.action.IdOlapCkAction;
 import com.gogh.action.IndexAction;
@@ -34,8 +36,10 @@ import com.gogh.action.MemAjaxAction;
 import com.gogh.action.MemberInsertAction;
 import com.gogh.action.ReplyDeleteAction;
 import com.gogh.action.ReplyInsertAction;
+import com.gogh.action.TestLoginAction;
 
 
+//Servlet은 하나만 사용하고 액션을 왔다갔다 하면서 기능들을 구현하는 것이다. 
 /**
  * Servlet implementation class BzipollFrontController
  */
@@ -97,6 +101,11 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/id_olap_ck.bizpoll")) {
 			System.out.println("컨트롤러의 if - id_olap_ck.bizpoll이 정상적으로 실행됩니다.");
 			action = new IdOlapCkAction();
+			forward = action.excute(request, response);
+		}
+		else if(command.equals("/testlogin.bizpoll")) {
+			System.out.println("컨트롤러의 if - testlogin.bizpoll이 정상적으로 실행됩니다.");
+			action = new TestLoginAction();
 			forward = action.excute(request, response);
 		}
 		//MemberInsertAction클래스를 실행시키는 부분.
@@ -167,6 +176,13 @@ public class BzipollFrontController extends HttpServlet {
   			forward = action.excute(request, response);
   		}
 		
+		//게시판 글쓰기 페이지에서 submit을 누르면 디비에 값을 저장 시킴
+		else if(command.equals("/boardinsertsave2.bizpoll")) {
+			System.out.println("컨트롤러의 if - boardinsertsave2.bizpoll이 정상적으로 실행됩니다.");
+  			action = new BoardInsertSaveAction2();
+  			forward = action.excute(request, response);
+  		}	
+		
 		else if(command.equals("/boarddetail.bizpoll")) {
 			System.out.println("컨트롤러의 if - boarddetail.bizpoll이 정상적으로 실행됩니다.");
   			action = new BoardDetailAction();
@@ -211,6 +227,12 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/boardsearch.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardsearch.bizpoll이 정상적으로 실행됩니다.");
 			action = new BoardSearchAction();
+			forward = action.excute(request, response);
+		}
+		
+		else if(command.equals("/commentlist.bizpoll")) {
+			System.out.println("컨트롤러의 if - commentlist.bizpoll이 정상적으로 실행됩니다.");
+			action = new CommentListAction();
 			forward = action.excute(request, response);
 		}
 		

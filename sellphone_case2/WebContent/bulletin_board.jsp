@@ -158,6 +158,9 @@ a {
 </script>
 </head>
 <body>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 	<div id="page1">
 		<div id="page2">
 			<div id="contents">

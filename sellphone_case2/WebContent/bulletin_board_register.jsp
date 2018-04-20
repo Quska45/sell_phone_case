@@ -102,7 +102,10 @@ a {
 </style>
 <script src="/js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-
+$(document).on("click", ".bbr_submit", function(){
+	alert("글쓰기 버튼 잘 눌림");
+	$("#bbp_frm").submit();
+});
 </script>
 
 </head>
@@ -113,7 +116,7 @@ a {
 				<h1 id="main_title">공지사항</h1>
 				<table class="tb1">
 					<tbody>
-						<form role="form" action="boardinsertsave.bizpoll" method="post">
+						<form name="bbp_frm" id="bbp_frm" action="boardinsertsave2.bizpoll" method="post">
 							<tr>
 								<th>Title</th>
 								<td class="tb_tit">
@@ -131,14 +134,14 @@ a {
 							<tr>
 								<th>Writer</th>
 								<td class="tb_tit">
-									<input type="text" id="bbp_writer" name="bbp_writer" placeholder="글쓴이를 입력하세요.">
+									<input type="text" id="bbp_writer" name="bbp_writer" value="${sessionScope.loginUser.mid}">
 								</td>
 							</tr>
-						<form>
+						</form>
 					</tbody>
 				</table>
 				<div class="allButton">
-					<a class="bbr_LIST ALL" href="#">등록</a>
+					<a class="bbr_submit" href="#">등록</a>
 				</div>
 			</div>
 		</div>

@@ -19,12 +19,18 @@ $(document).ready(function() {
 		formObj.submit();
 	});
 	
-	// 삭제
+	 // 삭제
 	$(".btn-danger").on("click", function() {
-		formObj.attr("action", "boarddelete.bizpoll");
-		formObj.attr("method", "get");
-		formObj.submit();
-	});
+		var size = $("#replyviewsize").val();
+		if(size.size() == 0){
+			formObj.attr("action", "boarddelete.bizpoll");
+			formObj.attr("method", "get");
+			formObj.submit();
+		} else {
+			alert("댓글이 있는 글은 삭제 할 수 없습니다.");
+		}
+		
+	}); 
 	
 	// 목록
 	$(".btn-primary").on("click", function() {
@@ -32,6 +38,21 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function(){
+	comment_list();
+});
+
+function comment_list(){
+	var bno = ${boardview.bno};
+	$.ajax({
+		url: "commentlist.bizpoll",
+		type: "POST",
+		data: "bno=" + bno,
+		success: function(result){
+			$("#commentList").html(result);
+		}
+	});
+};
 
 $(document).on("click", ".reply_del", function(){
 	var rno = $(this).attr("data_num");
@@ -43,7 +64,33 @@ $(document).on("click", ".reply_del", function(){
 		data: "rno=" + rno,
 		success: (function(data){
 				alert("댓글 삭제 성공");
-				location.reload();
+				comment_list();
+		}),
+		error: function(){
+			alert("system error");
+		}
+	});
+	
+});
+
+$(document).on("click", "#reply_insert", function(){
+	var name=$("#comment_name").val();
+	var content = $("#comment_input_write").val();
+	var bno = ${boardview.bno};
+	alert(name + content + bno);
+	$.ajax({
+		url: "replyinsert.bizpoll",
+		type: "POST",
+		dataType :  "JSON",
+		data: "content=" + content + "&bno=" + bno,
+		success: (function(data){
+			if(data.flag=="1"){
+				alert("댓글 입력 실패");
+			} else if(data.flag == "0") {
+				alert("댓글 입력 성공");
+				comment_list();
+				$("#comment_input_write").val("");
+			}
 		}),
 		error: function(){
 			alert("system error");
@@ -92,52 +139,27 @@ $(document).on("click", ".reply_del", function(){
 				</div>
 				
 				
-				<!-- 코멘트 시작 -->
-				<div class="box-body" style="border-top: 3px solid black; margin-top: 20px;">
-              				<div style="font-size: 20px; margin-bottom: 5px;">
-              				댓글 
-              					<span id="comment_count">${replycount}</span>
-              				</div>
-	              			
-	              			<c:if test="${replycount != 0}">	
-						<c:forEach items="${replyview}" var="replyview">
-							<div style="margin-bottom: 30px;">
-								<span id="comment_writer">${replyview.writer}</span>
-								<c:if test="${sessionScope.loginUser.mname == replyview.writer}">
-									<!-- data_num은 원래 정의되어 있는 속성이 아니라 ajax 에서 this를 이용해 값을 가져오기 위해 임의로 만든 것 -->
-									<a href="#" class="reply_del" data_num="${replyview.rno}">삭제</a>
-									<%-- <input type="hidden" value="${replyview.rno}" id="input_rno" name="input_rno">
-									<span><a href="#" id="reply_del" style="float:right; margin-left: 10px;">삭제</a></span> --%>
-								</c:if>
-								<span id="comment_date" style="float: right;">${replyview.regdate}</span>
-								<textarea name="comment_input_content" id="comment_input_content" style="display: block; width:100%" readonly="readonly">${replyview.content}</textarea>
-							</div>			
-						</c:forEach>
-					</c:if>	
-					<c:if test="${replycount == 0}">
-						<div>조회된 댓글이 없습니다.</div>
-					</c:if>
-					
-					
-					<form action="replyinsert.bizpoll" name="replyinsert" method="POST">
-		              			<c:choose>
-							<c:when test="${empty sessionScope.loginUser}">
-								<div style="margin-top: 20px;"><a href="index.bizpoll">로그인</a>
-								을 하셔야 댓글을 입력할 수 있습니다.</div>
-							</c:when>
-		              				<c:otherwise>
-				              			<div id="comment_con">
-									<span id="comment_writer">작성자</span>
-									<span id="comment_name" name="comment_name">${sessionScope.loginUser.mname}</span>
-									<span id="comment_date" style="float: right">작성일자</span>
-									<textarea name="comment_input_write" id="comment_input_write" placeholder="댓글을 입력하세요" style="display: block; width:100%"></textarea>
-									<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${boardview.bno}">
-									<input type="submit" value="댓글등록">
-								</div>		
-							</c:otherwise>
-						</c:choose>
-					</form>
-				</div>
+				<div id="commentList"></div>
+				
+				<form action="replyinsert.bizpoll" name="replyinsert" method="POST">
+					<input type="hidden" id="replyviewsize" name="replyviewsize" value="${replyview}">
+			            	<c:choose>
+						<c:when test="${empty sessionScope.loginUser}">
+							<div style="margin-top: 20px;"><a href="index.bizpoll">로그인</a>
+							을 하셔야 댓글을 입력할 수 있습니다.</div>
+						</c:when>
+			            				<c:otherwise>
+			              			<div id="comment_con">
+								<span id="comment_writer">작성자</span>
+								<input id="comment_name" name="comment_name" value="${sessionScope.loginUser.mname}">
+								<span id="comment_date" style="float: right">작성일자</span>
+								<textarea name="comment_input_write" id="comment_input_write" placeholder="댓글을 입력하세요" style="display: block; width:100%"></textarea>
+								<input type="hidden" id="comment_input_bno" name="comment_input_bno" value="${boardview.bno}">
+								<a id="reply_insert" name="reply_insert" href="#" replyinsert>댓글 등록</a>
+							</div>		
+						</c:otherwise>
+					</c:choose>
+				</form>
 				
 			</div>
 		</div>

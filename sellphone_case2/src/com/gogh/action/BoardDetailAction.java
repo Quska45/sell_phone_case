@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gogh.DAO.BoardDAO;
 import com.gogh.DAO.ReplyDAO;
@@ -29,24 +30,18 @@ public class BoardDetailAction implements Action{
 		
 		BoardDAO bDao = BoardDAO.getInstance();
 
+		
+		//조회수가 증가 할 때 세션값도 같이 보내줄 것이다.
+		//세션을 활용한 조회수 증가 방지
+		HttpSession session = request.getSession();
 		//게시글을 클릭하면 조회수가 1씩 오른다.
-		bDao.boardViewCnt(bno);
+		bDao.boardViewCnt(bno, session);
 
 		//상세 게시글 출력
 		BoardDTO bDto = bDao.boardDetailView(bno);
 		
-		//상세 게시글 댓글 출력
-		ReplyDAO rDao = ReplyDAO.getInstance();
-		List<ReplyDTO> list = rDao.replySelect(bno);
-		//댓글의 writer
-		request.setAttribute("replyview", list);
-		
 		request.setAttribute("boardview", bDto);
-		
-		int replyCount = list.size();
-		System.out.println("댓글의 숫자" + replyCount);
-		
-		request.setAttribute("replycount", replyCount);
+	
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);

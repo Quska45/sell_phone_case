@@ -85,6 +85,7 @@ public class ReplyDAO {
 				
 			}
 			
+			//게시글 삭제시 댓글 연쇄 삭제
 			public int replyDeleteAll(Integer bno) {
 				sqlSession = sqlSessionFactory.openSession();
 				try {
@@ -92,16 +93,18 @@ public class ReplyDAO {
 					sqlSession.commit();
 					
 					if(result > 0) {
-						System.out.println("댓글 삭제 성공");
+						System.out.println("게시글 삭제 시 댓글 삭제 성공");
 					} else {
-						System.out.println("댓글 삭제 실패");
+						System.out.println("게시글 삭제 시 댓글 삭제 실패");
 					}
 					
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
 				} finally {
-					sqlSession.close();
+					//세션에 값이 없으면 닫을 필요가 없기 때문에 널이 아닐경우에만 닫도록 해준다.
+					if(sqlSession != null)
+						sqlSession.close();
 				}
 				return result;
 			}

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
 <%@page import="java.util.*"%>
-<%
-    request.setCharacterEncoding("UTF-8");
-%>
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -49,16 +49,24 @@ $(document).ready(function() {
 							<!-- BoardListAction에서 보낸 boardlist의  bDto에 담아준다. -->
 						  <c:forEach items="${boardlist}" var="bDto">
 							  <tr>
+							  	<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/>
+							  	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate2"/>
 							  	<td>${bDto.bno}</td>
-							  	<td><a href="boarddetail.bizpoll?bno=${bDto.bno}">${bDto.title}</a><td>${bDto.replycnt}<td></td>
-							  	<td>${bDto.writer}</td>
 							  	<td>
-							  	<fmt:formatDate value="${today}" pattern="yyyy-mm-dd" var="today2"/>
-							  	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-mm-dd" var="regdate2"/>
+							  		<a href="boarddetail.bizpoll?bno=${bDto.bno}">${bDto.title}</a>
+							  		[${bDto.replycnt}] 
+							  		<c:if test="${today2 == regdate2}">
+							  		new
+							  		</c:if>
+							  		
+							  	</td>
+							  	<td>${bDto.writer}</td>
+							  
 								
 								<c:choose>
 									<c:when test="${today2 == regdate2}">
 										<td><fmt:formatDate pattern="HH:mm:ss" value="${bDto.regdate}"/></td>
+										
 									</c:when>
 									<c:otherwise>
 										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}"/></td>
