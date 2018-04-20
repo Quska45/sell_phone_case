@@ -20,7 +20,7 @@ public class BoardInsertSaveAction implements Action{
 		String content = request.getParameter("content");
 		String writer = request.getParameter("writer");
 		
-		System.out.println("title" + title + "content" + content + "writer" + writer);
+		System.out.println("title  " + title + "content  " + content + "writer  " + writer);
 		
 		//BoardDAO객체를 반환한다.
 		BoardDAO bDao = BoardDAO.getInstance();
