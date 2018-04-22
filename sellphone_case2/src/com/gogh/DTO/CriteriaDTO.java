@@ -81,12 +81,6 @@ public class CriteriaDTO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
-	
-	
-	
-	
-	
 }
 
 
