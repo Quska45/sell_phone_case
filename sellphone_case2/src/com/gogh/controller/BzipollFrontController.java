@@ -22,6 +22,7 @@ import com.gogh.action.BoardInsertViewAction2;
 import com.gogh.action.BoardListAction;
 import com.gogh.action.BoardListAction2;
 import com.gogh.action.BoardSearchAction;
+import com.gogh.action.BoardSearchAction2;
 import com.gogh.action.BoardUpdateSaveAction;
 import com.gogh.action.BoardUpdateViewAction;
 import com.gogh.action.CommentListAction;
@@ -235,6 +236,12 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/boardsearch.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardsearch.bizpoll이 정상적으로 실행됩니다.");
 			action = new BoardSearchAction();
+			forward = action.excute(request, response);
+		}
+		
+		else if(command.equals("/boardsearch2.bizpoll")) {
+			System.out.println("컨트롤러의 if - boardsearch2.bizpoll이 정상적으로 실행됩니다.");
+			action = new BoardSearchAction2();
 			forward = action.excute(request, response);
 		}
 		

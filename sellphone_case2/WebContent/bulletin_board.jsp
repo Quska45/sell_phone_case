@@ -167,6 +167,26 @@ a {
 		location.href = "boardinsertview2.bizpoll";
 		submit();
 	});
+	
+	$(document).on("click", "#searchbtn", function(){
+		var flag = $("#selsearch").val();
+		var keyword = $("#search_input").val();
+		
+		$.ajax({
+			url: "boardsearch2.bizpoll",
+			type: "POST",
+			dataType :  "JSON",
+			data: "flag=" + flag + "&keyword=" + keyword,
+			success: (function(data){
+				alert("댓글 삭제 성공");
+			}),
+			error: function(){
+				alert("system error");
+			}
+		});
+	
+	});
+	
 </script>
 </head>
 <body>
