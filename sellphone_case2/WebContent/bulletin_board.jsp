@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@ include file="header.jsp" %>
 
 
@@ -10,10 +13,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 인덱스</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+/* font-family: 'Hanna', sans-serif;  */
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css); 
+/* font-family: 'Jeju Gothic', sans-serif;  */
 body, th, span, a, div {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	font-family: 'Jeju Gothic', sans-serif;
 }
 tr {
 	height: 40px;
@@ -49,11 +57,11 @@ a {
 #board_top_right {
 	float: right;
 }
-#right_selbox {
+#selsearch {
 	width: 118px;
 	height: 38px;
 }
-#searchinput {
+#search_input {
 	width: 250px;
 	height: 32px;
 }
@@ -144,8 +152,12 @@ a {
 	font-size: 30px;
 	font-weight: bold;
 	margin-bottom: 10px;
-	
 }
+.board_pagenation{
+	margin-bottom: 15px;
+	height: 30px;
+}
+
 
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
@@ -186,13 +198,15 @@ a {
 				<!-- 검색 입력란 -->
 				<div id="clearfix">
 					<div id="board_top_right">
-						<select id="right_selbox">
+						<select id="selsearch" name="selsearch">
+							<option>직접입력</option>
 							<option>제목</option>
 							<option>내용</option>
 							<option>제목 + 내용</option>
+							<option>작성자</option>
 						</select>
-						<input id="searchinput" placeholder="검색어를 입력하세요"></input>
-						<button id="searchbtn">검색</button>
+						<input id="search_input" name="search_input" placeholder="검색어를 입력하세요"></input>
+						<a href="#" id="searchbtn">검색</a>
 					</div>
 					
 					<select id="board_top_left_selbox">
@@ -216,10 +230,26 @@ a {
 					<tbody>
 						<c:forEach items="${boardlist}" var="bDto">
 							<tr class="textbold">
-								<td id="th1_num">${bDto.bno}</td> 						
-								<td id="th2_title"><a href="boarddetail2.bizpoll?bno=${bDto.bno}">${bDto.title}</a></td> 						
+								<td id="th1_num">${bDto.bno}</td> 
+								
+								<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/>						
+								<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate2"/>						
+								<td id="th2_title">
+									<a href="boarddetail2.bizpoll?bno=${bDto.bno}">${bDto.title} [${bDto.replycnt}]
+										<c:if test="${today2 == regdate2}">	new	</c:if>
+										
+									</a>
+								</td> 						
 								<td id="th3_regi">${bDto.writer}</td> 						
-								<td id="th4_date">${bDto.regdate}</td> 						
+								<c:choose>
+									<c:when test="${today2 == regdate2}">
+										<td><fmt:formatDate pattern="HH:mm:ss" value="${bDto.regdate}"/></td>
+										
+									</c:when>
+									<c:otherwise>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}"/></td>
+									</c:otherwise>
+								</c:choose>						
 								<td id="th5_count">${bDto.viewcnt}</td> 						
 							</tr>
 						</c:forEach>
@@ -251,10 +281,10 @@ a {
 							</li>
 						</c:if>
 						</ul>
+						<span>
+							<a id="write" href="boardinsertview2.bizpoll">글쓰기</a>
+						</span>
 					</div>
-					<span>
-						<a id="write" href="boardinsertview2.bizpoll">글쓰기</a>
-					</span>
 				</div>
 			</div>
 		</div>

@@ -96,7 +96,6 @@ public class BoardDAO {
 				result = sqlSession.insert("boardinsert", bDto);
 				
 				sqlSession.commit();
-				System.out.println("result = " + result);
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -155,6 +154,12 @@ public class BoardDAO {
 			try {
 				result = sqlSession.delete("boarddelete", bno);
 				sqlSession.commit();
+				
+				if(result > 0 ){
+					System.out.println("게시글 삭제 성공");
+				} else {
+					System.out.println("게시글 삭제 실패");
+				}
 				
 			} catch (Exception e) {
 				// TODO: handle exception

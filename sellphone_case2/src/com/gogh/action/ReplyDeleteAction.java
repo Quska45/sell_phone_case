@@ -17,6 +17,7 @@ public class ReplyDeleteAction implements Action {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		//게시글 상세페이지에서 보내준 게시글 번호를 변수에 담아준다.
 		Integer rno = Integer.parseInt(request.getParameter("rno"));
 		System.out.println("rno" + rno);
 		

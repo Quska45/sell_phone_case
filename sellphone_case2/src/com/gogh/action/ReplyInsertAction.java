@@ -14,23 +14,29 @@ import com.gogh.DTO.MemberDTO;
 import com.gogh.DTO.ReplyDTO;
 
 public class ReplyInsertAction implements Action{
-
+//게시글 상세 페이지에서 댓글을 등록하기 위한 클래스
+	
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		//작성자를 표시 해주기 위해 세션 값을 받아와서 변수에 저장한다.
 		HttpSession session = request.getSession();
 		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
 		
-		String writer= loginUser.getMname();
+		//가져온 값들을 용이하게 사용하기 위해 변수에 담아준다.
+		String writer= request.getParameter("writer");
 		String content = request.getParameter("content");
 		Integer bno = Integer.parseInt(request.getParameter("bno"));
 		
+		//ReplyInsertAction에서 작업을 마치고 이동할 경로를 지정해준다.
 		String url="boarddetail.bizpoll?bno="+bno;
+		
+		//값을 잘 받아오는지 확인한다.
 		System.out.println("writer" + writer + "content" + content + "bno" + bno);
 		
+		//DAO를 통해 값이 디비에 저장 될 수 있도록   
 		ReplyDTO rDto = new ReplyDTO(content, writer, bno);
 		ReplyDAO rDao = ReplyDAO.getInstance();
 		int result = rDao.replyInsert(rDto);

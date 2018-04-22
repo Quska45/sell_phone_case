@@ -95,12 +95,12 @@ $(document).ready(function() {
 							</c:if>
 							
 							<select id="selsearch" name="selsearch" style="height: 25px;">
-	                                                            	<option value="1">-조건 선택-</option>
-	                                                            	<option value="2">제목</option>
-	                                                            	<option value="3">내용</option>
-	                                                            	<option value="4">제목+내용(다음카카오)</option>
-	                                                            	<option value="5">작성자</option>
-	                                                 </select>
+                                       	<option value="1">-조건 선택-</option>
+                                       	<option value="2">제목</option>
+                                       	<option value="3">내용</option>
+                                       	<option value="4">제목+내용(다음카카오)</option>
+                                       	<option value="5">작성자</option>
+                            </select>
 								<input id="search_input" name="search_input" type="text" placeholder="입력하시오">
 								<button type="submit" id="search_btn">검색</button>
 						</form>

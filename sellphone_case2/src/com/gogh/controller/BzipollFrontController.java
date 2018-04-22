@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gogh.action.Action;
 import com.gogh.action.ActionForward;
 import com.gogh.action.BoardDeleteAction;
+import com.gogh.action.BoardDeleteAction2;
 import com.gogh.action.BoardDetailAction;
 import com.gogh.action.BoardDetailAction2;
 import com.gogh.action.BoardInsertSaveAction;
@@ -24,6 +25,7 @@ import com.gogh.action.BoardSearchAction;
 import com.gogh.action.BoardUpdateSaveAction;
 import com.gogh.action.BoardUpdateViewAction;
 import com.gogh.action.CommentListAction;
+import com.gogh.action.CommentListAction2;
 import com.gogh.action.ConstractAction;
 import com.gogh.action.IdOlapCkAction;
 import com.gogh.action.IndexAction;
@@ -212,6 +214,12 @@ public class BzipollFrontController extends HttpServlet {
   			forward = action.excute(request, response);
   		}
 		
+		else if(command.equals("/boarddelete2.bizpoll")) {
+			System.out.println("컨트롤러의 if - boarddelete2.bizpoll이 정상적으로 실행됩니다.");
+  			action = new BoardDeleteAction2();
+  			forward = action.excute(request, response);
+  		}
+		
 		else if(command.equals("/replyinsert.bizpoll")) {
 			System.out.println("컨트롤러의 if - replyinsert.bizpoll이 정상적으로 실행됩니다.");
   			action = new ReplyInsertAction();
@@ -233,6 +241,13 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/commentlist.bizpoll")) {
 			System.out.println("컨트롤러의 if - commentlist.bizpoll이 정상적으로 실행됩니다.");
 			action = new CommentListAction();
+			forward = action.excute(request, response);
+		}
+		
+		//댓글이 등록 되었을 떄 ajax를 통해서 댓글을 다시 띄워주게한다.
+		else if(command.equals("/commentlist2.bizpoll")) {
+			System.out.println("컨트롤러의 if - commentlist2.bizpoll이 정상적으로 실행됩니다.");
+			action = new CommentListAction2();
 			forward = action.excute(request, response);
 		}
 		
