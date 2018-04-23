@@ -21,6 +21,7 @@ public class ReplyDeleteAction implements Action {
 		Integer rno = Integer.parseInt(request.getParameter("rno"));
 		System.out.println("rno" + rno);
 		
+		//DAO를 통해 댓글을 삭제 한다.
 		ReplyDAO rDao = ReplyDAO.getInstance();
 		rDao.replyDelete(rno);
 		

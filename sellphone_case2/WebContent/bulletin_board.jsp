@@ -12,6 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 인덱스</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 /* font-family: 'Hanna', sans-serif;  */
@@ -157,7 +158,9 @@ a {
 	margin-bottom: 15px;
 	height: 30px;
 }
-
+#th2_title {
+	text-align: left;
+}
 
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
@@ -168,6 +171,25 @@ a {
 		submit();
 	});
 	
+	//
+	$(document).on("change", "#board_top_left_selbox", function(){
+		var flag = $("#board_top_left_selbox").val();
+		alert(flag);
+		$.ajax({
+			url: "boardlistsort.bizpoll",
+			type: "POST",
+			dataType :  "JSON",
+			data: "flag=" + flag,
+			success: (function(data){
+				alert("댓글 삭제 성공");
+			}),
+			error: function(){
+				alert("system error");
+			}
+		});
+	});
+	
+	//검색 버튼을 눌렀을 때 검색을 시작함.
 	$(document).on("click", "#searchbtn", function(){
 		var flag = $("#selsearch").val();
 		var keyword = $("#search_input").val();
@@ -232,7 +254,8 @@ a {
 					<select id="board_top_left_selbox">
 						<option>최신순</option>
 						<option>조회순</option>
-						<option>뭐가 또 있냐 ㅡㅡ</option>
+						<option>등록자</option>
+						<option>등록일</option>
 					</select>
 				</div>
 				
@@ -255,9 +278,9 @@ a {
 								<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/>						
 								<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate2"/>						
 								<td id="th2_title">
-									<a href="boarddetail2.bizpoll?bno=${bDto.bno}">${bDto.title} [${bDto.replycnt}]
+									<a href="boarddetail2.bizpoll?bno=${bDto.bno}">${bDto.title} [${bDto.replycnt}]                  
 										<c:if test="${today2 == regdate2}">	new	</c:if>
-										
+										<i class="fa fa-folder" style="width:15px; height: 15px; float: right; margin-right: 15px;"></i>
 									</a>
 								</td> 						
 								<td id="th3_regi">${bDto.writer}</td> 						

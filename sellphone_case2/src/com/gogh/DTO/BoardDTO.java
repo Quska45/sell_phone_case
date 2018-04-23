@@ -97,6 +97,14 @@ public class BoardDTO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
+
+	public int getGoodcnt() {
+		return goodcnt;
+	}
+
+	public void setGoodcnt(int goodcnt) {
+		this.goodcnt = goodcnt;
+	}
 	
 	
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -243,6 +244,71 @@ public class BoardDAO {
 			
 			return list;
 		}
+		
+		
+		//게시판 상세 페이지에서 좋아요를 누르면 좋아요의 숫자를 늘려줌
+		public int boardFavorite(Integer bno, HttpSession countSession) {
+			sqlSession = sqlSessionFactory.openSession();
+			int result = 0;
+			try {
+				long update_time = 0;
+				
+				//"read_time_" + bno의 값을 가지는 값을 가져오라는 것인데 처음 접속 했을 때는 당연히 값이 없다. 따라서 최초 한 번은 좋아요가 무조건 증가 하게 된다.
+				//두 번째 좋아요를 누를 때는 read_good_bno가 생기기 때문에 if문을 타게 된다. 세션에 저장되는 값은 최초 좋아요를 클릭했을 때의 시간이다.
+				if(countSession.getAttribute("read_good_" + bno) != null) {
+					update_time = (long)countSession.getAttribute("read_good_" + bno);
+				}
+				
+				//현재 시간을 담는다.
+				long current_time = System.currentTimeMillis();
+				
+				//현재 시간과 조회수 1증가한 시간을 비교해서 24시간(1일)이 지났으면 조회수 1증가 
+				//시간의 단위는 밀리세컨드이기 때문에 1000을 곱했다.
+				if(current_time - update_time > 24 * 60 * 60 * 1000) {
+					
+					result = sqlSession.update("boardFavorite", bno);
+					sqlSession.commit();
+					
+					//조회수 1증가한 시간을 session에 담는다.
+					//"read_good_" + bno에 current_time이 담기게 된다.
+					countSession.setAttribute("read_good_" + bno, current_time);
+				}
+				
+				
+				if(result > 0) {
+					System.out.println("좋아요가 하나 올라갔습니다.");
+				} else {
+					System.out.println("좋아요 실패입니다.");
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			return result;
+		}
+		
+		
+		public BoardDTO boardSelectOne(Integer bno) {
+			sqlSession = sqlSessionFactory.openSession();
+			BoardDTO bDTO = null;
+			try {
+				bDTO = sqlSession.selectOne("boardselectone", bno);
+				System.out.println(bDTO.getBno());
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			return bDTO;
+		}
+		
 		
 }
 

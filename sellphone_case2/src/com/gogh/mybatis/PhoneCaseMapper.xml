@@ -150,6 +150,7 @@
 		SELECT *
 		FROM tblreply
 		WHERE bno=#{bno}
+		ORDER BY rno
 	</select>
 	
 	<!-- 댓글을 입력해서 저장하는 sql -->
@@ -200,6 +201,21 @@
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}]]>
 	</select>
 	
+	
+	<!-- 게시판 상세 페이지 에서 좋아요를 눌렀을 때 좋아요가 올라가게 하는 것 -->
+	<update id="boardFavorite" parameterType="Integer">
+		UPDATE tblboard 
+		SET goodcnt = goodcnt + 1
+		WHERE bno = #{bno}
+		
+	</update>
+	
+	<!-- 게시판의 글 번호를 가지고 해당 게시글 하나 만의 정보를 가져오는 select문 -->
+	<select id="boardselectone" parameterType="Integer" resultType="boardDTO">
+		SELECT *
+		FROM tblboard
+		WHERE bno = #{bno}
+	</select>
 	
 </mapper>
 

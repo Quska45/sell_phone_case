@@ -17,6 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 눌러서 들어간 페이지</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 /* font-family: 'Hanna', sans-serif;  */
@@ -152,6 +153,7 @@ a {
 			url: "commentlist2.bizpoll",
 			type: "POST",
 			data: "bno=" + bno,
+			//result는 bizpoll을 타서 진행 됐던 작업들의 결과 이다.(commentlist2.jsp)
 			success: (function(result){
 				$("#commentList").html(result);
 			})
@@ -169,6 +171,7 @@ a {
 			data: "rno=" + rno,
 			success: (function(data){
 				alert("댓글 삭제 성공");
+				comment_list();
 			}),
 			error: function(){
 				alert("system error");
@@ -181,7 +184,6 @@ a {
 		var writer = $("#reply_writer").val();
 		var content = $("#reply_con").val();
 		var bno = $("#reply_bno").val();
-		alert(writer + content + bno);
 		
 		
 		$.ajax({
@@ -191,10 +193,9 @@ a {
 			data: "content=" + content + "&bno=" + bno + "&writer=" + writer,
 			success: (function(data){
 				if(data.flag == "0") {
-					alert("댓글 등록 성공");
+					$("#reply_con").val("");
 					comment_list();
 				} else if(data.flag == "1") {
-					alert("댓글 등록 실패");
 					comment_list();
 				}
 			}),
@@ -226,6 +227,28 @@ a {
 			}
 		});
 		
+	});
+	
+	
+	//좋아요를 누르면 좋아요가 하나 씩 늘어남
+	$(document).on("click", "#bbp_favorite", function(){
+		var bno = ${boardview.bno};
+		$.ajax({
+			url: "boardfavorite.bizpoll",
+			type: "POST",
+			dataType :  "JSON",
+			data: "bno=" + bno,
+			success: (function(data){
+				if(data.favoritecount > 0) {
+					location.reload();
+				} else {
+					alert("실패");
+				}
+			}),
+			error: function(){
+				alert("system error");
+			}
+		});
 	});
 	
 </script>
@@ -261,6 +284,7 @@ a {
 								<a href="#" id="bbp_modify" name="bbp_modify">수정</a>
 								<a href="#" id="bbp_delete" name="bbp_delete">삭제</a>
 								<a href="#" id="bbp_list" name="bbp_list">목록</a>
+								<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i>${boardview.goodcnt}</a>
 							</c:when>
 							<c:otherwise>
 								<a href="#" id="bbp_list" name="bbp_list">목록</a>

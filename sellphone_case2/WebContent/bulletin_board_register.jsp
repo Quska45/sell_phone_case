@@ -9,10 +9,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+/* font-family: 'Hanna', sans-serif;  */
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css); 
+/* font-family: 'Jeju Gothic', sans-serif;  */
 body,th, span, a {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+th {
+	width: 100px;
 }
 
 table {
@@ -86,7 +94,8 @@ a {
 	font-size: 14px;
 	box-sizing: border-box;
 	line-height: 41px;
-	width: 50%;
+	width: 25%;
+	text-align: center;
 }
 
 .allButton a {
@@ -98,14 +107,61 @@ a {
 .allButton {
 	margin-top: 30px;
 }
+.add_file {
+	width: 75px;
+	border-radius: 4px;
+	background: grey;
+	cursor: pointer;
+	text-align: center;
+	height: 32px;
+	line-height: 32px;
+	position: relative;
+	font-family: 'Jeju Gothic', sans-serif;
+}
+#add_file {
+	display: none;
+}
+.add_file_label {
+	width: 100px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.file_name{
+	position: absolute;
+	top: 0px;
+	left: 84px;
+	height: 30px;
+	width: 289px;
+	line-height: 30px;
+}
 
 </style>
-<script src="/js/jquery-3.3.1.js"></script>
+<script src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 $(document).on("click", ".bbr_submit", function(){
 	alert("글쓰기 버튼 잘 눌림");
 	$("#bbp_frm").submit();
 });
+
+$(document).on("click", "#add_file", function(){
+	var file_val = $("#add_file");
+	alert(file_val);
+	
+	file_val.on("change", function(){
+		var file_name = $("#add_file").val();
+		alert(file_name);
+		$(".file_name").val(file_name);
+	});
+
+});
+
+
+
+
+
 </script>
 
 </head>
@@ -121,6 +177,18 @@ $(document).on("click", ".bbr_submit", function(){
 								<th>Title</th>
 								<td class="tb_tit">
 								 	<input type="text" id="bbp_title" name="bbp_title" placeholder="제목을 입력하세요.">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>첨부파일</th>
+								<td style="padding: 10px;">
+									<div class="add_file">
+									<input class="add_file" value="파일선택">
+									<input class="file_name">
+									<label class="add_file_label" for="add_file"></label>
+									<input id="add_file" name="add_file" type="file">
+									</div>
 								</td>
 							</tr>
 							

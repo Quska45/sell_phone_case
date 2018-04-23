@@ -15,12 +15,14 @@ import com.gogh.action.BoardDeleteAction;
 import com.gogh.action.BoardDeleteAction2;
 import com.gogh.action.BoardDetailAction;
 import com.gogh.action.BoardDetailAction2;
+import com.gogh.action.BoardFavoriteAction;
 import com.gogh.action.BoardInsertSaveAction;
 import com.gogh.action.BoardInsertSaveAction2;
 import com.gogh.action.BoardInsertViewAction;
 import com.gogh.action.BoardInsertViewAction2;
 import com.gogh.action.BoardListAction;
 import com.gogh.action.BoardListAction2;
+import com.gogh.action.BoardListSortAction;
 import com.gogh.action.BoardSearchAction;
 import com.gogh.action.BoardSearchAction2;
 import com.gogh.action.BoardUpdateSaveAction;
@@ -63,6 +65,8 @@ public class BzipollFrontController extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		Action action = null;
 		
@@ -255,6 +259,20 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/commentlist2.bizpoll")) {
 			System.out.println("컨트롤러의 if - commentlist2.bizpoll이 정상적으로 실행됩니다.");
 			action = new CommentListAction2();
+			forward = action.excute(request, response);
+		}
+		
+		//게시글 상세 페이지 에서 좋아요를 누르면 여기를 타서 좋아요가 늘어난다.
+		else if(command.equals("/boardfavorite.bizpoll")) {
+			System.out.println("컨트롤러의 if - boardfavorite.bizpoll이 정상적으로 실행됩니다.");
+			action = new BoardFavoriteAction();
+			forward = action.excute(request, response);
+		}
+		
+		
+		else if(command.equals("/boardlistsort.bizpoll")) {
+			System.out.println("컨트롤러의 if - boardlistsort.bizpoll이 정상적으로 실행됩니다.");
+			action = new BoardListSortAction();
 			forward = action.excute(request, response);
 		}
 		
