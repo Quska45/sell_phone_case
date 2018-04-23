@@ -38,9 +38,11 @@ public class BoardSearchAction2 implements Action{
 		System.out.println("페이지 번호" + page);
 		//
 		criDto.setPage(page);
+		criDto.setFlag(flag);
+		criDto.setKeyword(keyword);
 		
 		BoardDAO bDao = BoardDAO.getInstance();
-		List<BoardDTO> boardlist = bDao.listAll(criDto); 
+		List<BoardDTO> boardlist = bDao.boardSearch(criDto); 
 		request.setAttribute("boardlist", boardlist);
 		
 		

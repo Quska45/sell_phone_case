@@ -40,13 +40,16 @@ public class BoardListAction implements Action {
 		//위에 선언된 Action에서 사용되는 page번호가 criDto에 들어간다.
 		criDto.setPage(page);
 		
+		
+		
 		//싱글톤 패턴으로 만들었기 때문에 함수로 객체에 접근한다. 클래스명으로 바로 접근해준다.
 		BoardDAO bDao = BoardDAO.getInstance();
 		//listAll()를 탈 때 listCriteria sql문을 타야하고 가져가는 값은 criDto이다.
 		List<BoardDTO> boardlist = bDao.listAll(criDto); //list(게시글 목록)과 같다.
-				
 		//이렇게 하면 만들어진 게시글의 목록이 request에 담기게 된다.
 		request.setAttribute("boardlist", boardlist);
+		
+		
 		
 		
 		PageMakerDTO pageMaker = new PageMakerDTO();
@@ -55,14 +58,19 @@ public class BoardListAction implements Action {
 		//여기게 전체 게시글의 건수가 담기게 된다.
 		int totalCount = bDao.totalCount(criDto);
 		pageMaker.setTotalCount(totalCount);
-		
 		System.out.println("게시글 전체" + pageMaker.getTotalCount());
-		
 		request.setAttribute("pageMaker", pageMaker);
+		
+		
+		
 		
 		//게시판에서 오늘 쓴 것은 날짜만 뜨고 예전에 쓴것은 일까지 뜨도록 하려고 한다.
 		Date today = new Date();
 		request.setAttribute("today", today);
+		
+		
+		
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);

@@ -171,29 +171,18 @@ a {
 		submit();
 	});
 	
-	//
+	//최신순, 조회 수 등 내가 원하는 것으로 게시글 리스트를 정렬 할 수 있음
 	$(document).on("change", "#board_top_left_selbox", function(){
 		var flag = $("#board_top_left_selbox").val();
 		alert(flag);
-		$.ajax({
-			url: "boardlistsort.bizpoll",
-			type: "POST",
-			dataType :  "JSON",
-			data: "flag=" + flag,
-			success: (function(data){
-				alert("댓글 삭제 성공");
-			}),
-			error: function(){
-				alert("system error");
-			}
-		});
+		location.href="boardlistsort.bizpoll?flag=" + flag;
 	});
 	
 	//검색 버튼을 눌렀을 때 검색을 시작함.
 	$(document).on("click", "#searchbtn", function(){
 		var flag = $("#selsearch").val();
 		var keyword = $("#search_input").val();
-		
+
 		$.ajax({
 			url: "boardsearch2.bizpoll",
 			type: "POST",
@@ -252,10 +241,11 @@ a {
 					</div>
 					
 					<select id="board_top_left_selbox">
+						<option>선택</option>
 						<option>최신순</option>
 						<option>조회순</option>
 						<option>등록자</option>
-						<option>등록일</option>
+						<option>제목</option>
 					</select>
 				</div>
 				

@@ -291,7 +291,7 @@ public class BoardDAO {
 			return result;
 		}
 		
-		
+		//tblboard 테이블에 있는 컬럼을 bno에 따라 한 개만 select해오는 메소드
 		public BoardDTO boardSelectOne(Integer bno) {
 			sqlSession = sqlSessionFactory.openSession();
 			BoardDTO bDTO = null;
@@ -307,6 +307,35 @@ public class BoardDAO {
 			}
 			
 			return bDTO;
+		}
+		
+		//flag 값에 따라 각각 다른 순서로 게시글 리스트를 정렬 해주는 메소드
+		public List<BoardDTO> boardSort(CriteriaDTO criDto){
+			sqlSession = sqlSessionFactory.openSession();
+			List<BoardDTO> list = new ArrayList<>();
+			try {
+				list = sqlSession.selectList("boardsort", criDto);
+				
+				for(BoardDTO bDto : list){
+					System.out.print(bDto.getBno());
+					System.out.print(bDto.getContents());
+					System.out.print(bDto.getGoodcnt());
+					System.out.print(bDto.getReplycnt());
+					System.out.print(bDto.getTitle());
+					System.out.print(bDto.getViewcnt());
+					System.out.print(bDto.getwriter());
+					System.out.print(bDto.getregdate());
+					System.out.println();
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			return list;
 		}
 		
 		

@@ -217,6 +217,36 @@
 		WHERE bno = #{bno}
 	</select>
 	
+	
+	<!-- flag에 따라서 각 다른 순서로 게시글 리스트를 출력하는 메소드 -->
+	<select id="boardsort" parameterType="criteriaDTO" resultType="boardDTO">
+		<![CDATA[
+			SELECT *
+			FROM (
+				SELECT rownum rnum,
+				a.*
+				FROM (
+					SELECT *
+					FROM tblboard]]>
+					<if test='flag == "최신순"'>
+						<![CDATA[ORDER BY bno]]>
+						</if>
+						<if test='flag == "조회순"'>
+						<![CDATA[ORDER BY viewcnt]]>
+						</if>
+						<if test='flag == "등록자"'>
+						<![CDATA[ORDER BY writer]]>
+						</if>
+						<if test='flag == "제목"'>
+						<![CDATA[ORDER BY title]]>
+						</if>
+					<![CDATA[
+					ORDER BY bno desc
+				) a
+			)
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}]]>
+	</select>
+	
 </mapper>
 
 
