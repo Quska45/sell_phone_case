@@ -39,6 +39,9 @@ public class LoginCkAction implements Action{
 			url = "index.bizpoll";
 		}
 		
+		
+		
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);

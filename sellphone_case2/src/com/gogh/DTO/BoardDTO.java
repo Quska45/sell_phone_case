@@ -12,6 +12,12 @@ public class BoardDTO {
 	private int viewcnt;
 	private int goodcnt;
 	private int replycnt;
+	private String filename;
+	private int filesize;
+	private int downcnt;
+	private int ref;
+	private int re_step;
+	private int re_level;
 	
 	public BoardDTO() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +45,17 @@ public class BoardDTO {
 		this.writer = writer;
 	}
 
-	
+
+
+	public BoardDTO(String title, String contents, String writer, String filename, int filesize) {
+		super();
+		this.title = title;
+		this.contents = contents;
+		this.writer = writer;
+		this.filename = filename;
+		this.filesize = filesize;
+	}
+
 	public BoardDTO(int bno, String title, String contents, String writer, Date regdate, int viewcnt) {
 		super();
 		this.bno = bno;
@@ -104,6 +120,54 @@ public class BoardDTO {
 
 	public void setGoodcnt(int goodcnt) {
 		this.goodcnt = goodcnt;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public int getFilesize() {
+		return filesize;
+	}
+
+	public void setFilesize(int filesize) {
+		this.filesize = filesize;
+	}
+
+	public int getRef() {
+		return ref;
+	}
+
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+
+	public int getRe_step() {
+		return re_step;
+	}
+
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+
+	public int getRe_level() {
+		return re_level;
+	}
+
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
+	}
+
+	public int getDowncnt() {
+		return downcnt;
+	}
+
+	public void setDowncnt(int downcnt) {
+		this.downcnt = downcnt;
 	}
 	
 	

@@ -88,11 +88,10 @@ public class BoardDAO {
 		}
 		
 		//게시글을 등록하는 메소드
-		public int boardInsert(String title, String content, String writer) {
+		public int boardInsert(BoardDTO bDto) {
 			sqlSession = sqlSessionFactory.openSession();
 			
 			try {
-				BoardDTO bDto = new BoardDTO(title, content, writer);
 				//문법상 매개변수는 1개만 보낼 수 있기 때문에 DTO를 사용한다.
 				result = sqlSession.insert("boardinsert", bDto);
 				
@@ -338,6 +337,43 @@ public class BoardDAO {
 			return list;
 		}
 		
+		//tblboard에서 파일의 이름을 가져오는 메소드
+		public String getFileName(Integer bno) {
+			sqlSession = sqlSessionFactory.openSession();
+			String filename = null;
+			try {
+				filename = sqlSession.selectOne("getFileName", bno);
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+			return filename;
+		}
+		
+		
+		public void boardDowncnt(Integer bno) {
+			sqlSession = sqlSessionFactory.openSession();
+			try {
+				result = sqlSession.update("downloadcount", bno);
+				if(result >0) {
+					System.out.println("다운로드 수 증가 성공");
+				} else {
+					System.out.println("다운로드 수 증가 실패");
+				}
+				sqlSession.commit();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+		}
 		
 }
 

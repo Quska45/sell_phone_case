@@ -172,7 +172,8 @@ $(document).on("click", "#add_file", function(){
 				<h1 id="main_title">공지사항</h1>
 				<table class="tb1">
 					<tbody>
-						<form name="bbp_frm" id="bbp_frm" action="boardinsertsave2.bizpoll" method="post">
+						<!-- 파일을 첨부 할 때는 post방식과 enctype이 추가되어야 한다는 것을 명심하자 -->
+						<form name="bbp_frm" id="bbp_frm" action="boardinsertsave2.bizpoll" method="POST" enctype="multipart/form-data">
 							<tr>
 								<th>Title</th>
 								<td class="tb_tit">

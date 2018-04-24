@@ -6,7 +6,8 @@
     request.setCharacterEncoding("UTF-8");
  
 %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>   
     
 <%@ include file="header.jsp" %>    
 
@@ -262,18 +263,31 @@ a {
 					<tbody>
 						<tr>
 							<td>
-								<div id="bd_title">${boardview.title}</div>
+								<div id="bd_title">제목 : ${boardview.title}</div>
 								<div id="bd_date">${boardview.regdate}</div>
 								<div id="bd_author">${boardview.writer}</div>
 							</td>	
 						</tr>
 						<tr>
 							<td>
+								<spqn>첨부파일 : 
+									<c:if test="${boardview.filename != null}">
+										<strong><a id="add_file" href="download.bizpoll?bno=${boardview.bno}">${boardview.filename}</a></strong>
+									</c:if>
+								</span>
+								
+								<span>${boardview.downcnt}</span>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
 								<div class="bd_con">
-									<p>${boardview.contents}</p>
+									<p>내용 : ${boardview.contents}</p>
 								</div>
 							</td>
 						</tr>
+						
 					</tbody>
 				</table>
 				
@@ -303,9 +317,17 @@ a {
 						<div>
 							<form>
 								<input type="hidden" id="reply_bno" name="reply_bno" value="${boardview.bno}">
-								<input id="reply_writer" name="reply_writer" value="${boardview.writer}" readonly="readonly" style="width: 80px; text-align: center;">
-								<div><textarea id="reply_con" name="reply_con" placeholder="댓글을 입력하세요"></textarea></div>
-								<a href="#" id="comment_insert">입력</a>
+								<c:choose>
+									<c:when test="${sessionScope.loginUser.mid != null}">
+										<input id="reply_writer" name="reply_writer" value="${sessionScope.loginUser.mid}" readonly="readonly" style="width: 80px; text-align: center;">
+										<div><textarea id="reply_con" name="reply_con" placeholder="댓글을 입력하세요"></textarea></div>
+										<a href="#" id="comment_insert">입력</a>
+									</c:when>
+									<c:otherwise>
+										<a href="index.bipoll" style="color: blue;">로그인</a>을 하시면 댓글을 작성할 수 있습니다.
+									</c:otherwise>
+								</c:choose>
+								
 							</form>
 						</div>
 					</div>

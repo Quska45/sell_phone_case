@@ -56,8 +56,8 @@
 	
 	<!-- 글쓰기에서 글을 쓰면 뜨는 글쓰는 창에서 값을 입력하면 디비에 입력해줌 -->
 	<insert id="boardinsert">
-		INSERT INTO tblboard(bno, title, contents, writer)
-		VALUES(seq_tblboard_bno.nextval,#{title}, #{contents}, #{writer})
+		INSERT INTO tblboard(bno, title, contents, writer, filename, filesize, ref, re_step, re_level)
+		VALUES((SELECT nvl(max(bno)+1, 1) from tblboard),#{title}, #{contents}, #{writer}, #{filename}, #{filesize}, (SELECT nvl(max(bno)+1, 1) from tblboard), 1 ,0)
 	</insert>
 	
 	<!-- 게시글 목록에서 보고 싶은 글을 클릭하면 상세페이지의 정보를 가져오는 sql문 -->
@@ -228,7 +228,7 @@
 				FROM (
 					SELECT *
 					FROM tblboard]]>
-					<if test='flag == "최신순"'>
+						<if test='flag == "최신순"'>
 						<![CDATA[ORDER BY bno]]>
 						</if>
 						<if test='flag == "조회순"'>
@@ -241,11 +241,25 @@
 						<![CDATA[ORDER BY title]]>
 						</if>
 					<![CDATA[
-					ORDER BY bno desc
 				) a
 			)
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}]]>
 	</select>
+	
+	
+	<!--  -->
+	<select id="getFileName" parameterType="Integer" resultType="String">
+		SELECT filename
+		FROM tblboard
+		WHERE bno=#{bno}
+	</select>
+	
+	
+	<update id="downloadcount" parameterType="Integer">
+		UPDATE tblboard
+		SET downcnt = downcnt + 1
+		WHERE bno=#{bno}
+	</update>
 	
 </mapper>
 

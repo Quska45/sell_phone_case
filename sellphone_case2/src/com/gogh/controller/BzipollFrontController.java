@@ -30,6 +30,7 @@ import com.gogh.action.BoardUpdateViewAction;
 import com.gogh.action.CommentListAction;
 import com.gogh.action.CommentListAction2;
 import com.gogh.action.ConstractAction;
+import com.gogh.action.DownloadAction;
 import com.gogh.action.IdOlapCkAction;
 import com.gogh.action.IndexAction;
 import com.gogh.action.JoinAction;
@@ -269,10 +270,17 @@ public class BzipollFrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		}
 		
-		
+		//게시글의 리스트를 flag값에 따라서 정렬 시켜준다.
 		else if(command.equals("/boardlistsort.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardlistsort.bizpoll이 정상적으로 실행됩니다.");
 			action = new BoardListSortAction();
+			forward = action.excute(request, response);
+		}
+		
+		//게시글 상세 페이지에서 첨부파일을 누르면 파일을 다운받을 수 있게 하는 비즈폴
+		else if(command.equals("/download.bizpoll")) {
+			System.out.println("컨트롤러의 if - download.bizpoll이 정상적으로 실행됩니다.");
+			action = new DownloadAction();
 			forward = action.excute(request, response);
 		}
 		

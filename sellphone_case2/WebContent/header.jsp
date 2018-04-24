@@ -124,7 +124,7 @@ body, ul {
      }
      #topArea {
      /* 두 번째 줄 */
-          height: 220px;
+          height: 160px;
           position: relative; /* line2_search의 위치를 잡아줌 */
           /* background-image: url(image/01.png);
           background-position: 50% 50%;
@@ -172,8 +172,8 @@ body, ul {
      }
      
      #logo {
-          width: 280px;
-          height: 180px;
+          width: 260px;
+          height: 140px;
           display: block;
           margin: 20px auto;
           cursor: pointer;
@@ -578,11 +578,11 @@ body, ul {
 			dataType :  "JSON",
 			data: "id=" + lid + "&pw=" + lpw,
 			success: (function(data){
-				if(data.flag == "1") {
+				if(data.id != null && data.pw != null) {
 					alert("로그인 성공");
 					//index 페이지로 이동
-					$("#login_form").submit();
-				} else if(data.flag == "0") {
+					location.reload();
+				} else {
 					alert("로그인실패");
 					$("#login_id").select();
 					$("#ErrCk").css("display", "block");
@@ -605,7 +605,7 @@ body, ul {
 					alert("로그아웃 성공");
 					alert("data.flag" + data.flag);
 					//index.bizpoll을 띄우라는 것이다.
-					location.href="index.bizpoll";
+					location.reload();
 				} else if(data.flag!="0"){
 					alert("data.flag" + data.flag);
 					alert("로그아웃 실패");
