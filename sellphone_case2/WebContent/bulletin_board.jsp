@@ -45,6 +45,7 @@ a {
 #contents {
 	padding: 40px;
 	border: 1px solid grey;
+	background: #ffffff;
 }
 #clearfix {
 	border: 5px solid black;
@@ -126,6 +127,15 @@ a {
 	border: none!important;
 	
 }
+#write_not_login {
+	position: absolute;
+	top: 0;
+	right:0;
+	color:black!important;
+	background-color: grey;
+	border: none!important;
+	
+}
 #select_category {
 	background-color: #f5f5f5;
 	border: 1px solid #d2d2d2;
@@ -165,6 +175,7 @@ a {
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+	//글쓰기 버튼을 눌렀을 때 로그인이 되어 있다면 게시글을 등록하는 페이지로 넘어가는 서블릿을 타게함 
 	$("#write").on("click", function() {
 		alert("게시글 등록 버튼 잘 눌림");
 		location.href = "boardinsertview2.bizpoll";
@@ -195,6 +206,18 @@ a {
 				alert("system error");
 			}
 		});
+	
+	});
+	
+	//글쓰기를 누를 때 로그인 모달 창이 뜨게 한다.
+	$(document).ready(function(){
+		$("#write_not_login").click(function(){
+			$("#myModal").css("display", "block");
+		});	
+	
+		$(".close").click(function(){
+			$("#myModal").css("display", "none");
+		})
 	
 	});
 	
@@ -268,7 +291,12 @@ a {
 								<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/>						
 								<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate2"/>						
 								<td id="th2_title">
-									<a href="boarddetail2.bizpoll?bno=${bDto.bno}">${bDto.title} [${bDto.replycnt}]                  
+									<a href="boarddetail2.bizpoll?bno=${bDto.bno}">
+									<c:forEach var = "i" begin = "1" end = "${bDto.re_level}">
+										&nbsp;&nbsp;
+									</c:forEach>
+										${bDto.title}
+									[${bDto.replycnt}]                  
 										<c:if test="${today2 == regdate2}">	new	</c:if>
 										<c:if test="${bDto.filesize > 0}">
 											<i class="fa fa-folder" style="width:15px; height: 15px; float: right; margin-right: 15px;"></i>
@@ -306,7 +334,7 @@ a {
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 								<!-- c:out은 해당 번호에 페이지를 띄웠을 때 변화를 주기 위한 것이다. 변하는 것은 active를 통해 값이 참이었을 때 실행되는 것이다. -->
 								<li <c:out value="${pageMaker.criDto.page == idx? 'class=active':''}"/>>
-								<a href="boardlistsort.bizpoll?page=${idx}&flag=${}">${idx}</a></li>
+								<a href="boardlistsort.bizpoll?page=${idx}">${idx}</a></li>
 							</c:forEach>
 								
 							</li>
@@ -317,7 +345,15 @@ a {
 						</c:if>
 						</ul>
 						<span>
-							<a id="write" href="boardinsertview2.bizpoll">글쓰기</a>
+							<c:choose>
+								<c:when test="${empty sessionScope.loginUser}">
+									<a id="write_not_login" href="#">글쓰기</a>
+								</c:when>
+								<c:otherwise>
+									<a id="write" href="#">글쓰기</a>
+								
+								</c:otherwise>
+							</c:choose>
 						</span>
 					</div>
 				</div>

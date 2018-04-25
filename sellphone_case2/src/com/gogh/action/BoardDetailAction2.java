@@ -48,6 +48,7 @@ public class BoardDetailAction2 implements Action{
 		//댓글의 수를 변수에 저장하고 이것을 replycount라는 이름으로 bulletin_board_page로 보내준다.
 		//이걸 사용해서 댓글이 몇건인지 띄워준다.
 		int replyCount = list.size();
+		System.out.println(replyCount);
 		request.setAttribute("replycount", replyCount);
 		
 		

@@ -15,8 +15,11 @@ public class BoardDTO {
 	private String filename;
 	private int filesize;
 	private int downcnt;
+	//답변그룹번호
 	private int ref;
+	//출력순서
 	private int re_step;
+	//답변단계
 	private int re_level;
 	
 	public BoardDTO() {
@@ -38,6 +41,21 @@ public class BoardDTO {
 		this.contents = contents;
 	}
 	
+	
+	
+	public BoardDTO(String title, String contents, String writer, String filename, int filesize, int ref, int re_step,
+			int re_level) {
+		super();
+		this.title = title;
+		this.contents = contents;
+		this.writer = writer;
+		this.filename = filename;
+		this.filesize = filesize;
+		this.ref = ref;
+		this.re_step = re_step;
+		this.re_level = re_level;
+	}
+
 	public BoardDTO(String title, String contents, String writer) {
 		super();
 		this.title = title;

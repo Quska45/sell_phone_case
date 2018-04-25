@@ -33,6 +33,9 @@ public class CommentListAction2 implements Action{
 		//댓글리스트가 담긴 list를 replyview라는 이름으로 상세게시글 jsp로 보내줬
 		request.setAttribute("replyview", replylist);
 		
+		int listCount = replylist.size();
+		request.setAttribute("replycount", listCount);
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);

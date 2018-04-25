@@ -49,6 +49,7 @@ a {
 #contents {
 	padding: 40px;
 	border: 1px solid grey;
+	background: #ffffff;
 }
 #main_title {
 	font-size: 24px;
@@ -252,6 +253,23 @@ a {
 		});
 	});
 	
+	//로그인이 되어 있지 않은 상태에
+	$(document).on("click", "#bbp_answer_null", function(){
+		alert("로그인 하시면 댓글을 달 수 있습니다.");
+	});
+	
+	//로그인을 누를 때 로그인 모달 창이 뜨게 한다.
+	$(document).ready(function(){
+		$("#bbp_login").click(function(){
+			$("#myModal").css("display", "block");
+		});	
+	
+		$(".close").click(function(){
+			$("#myModal").css("display", "none");
+		})
+	
+	});
+	
 </script>
 </head>
 <body>
@@ -292,23 +310,24 @@ a {
 				</table>
 				
 				<div>
-						<c:choose>
-							<c:when test="${boardview.writer == sessionScope.loginUser.mid}">
-								<input id="bbp_bno" name="bbp_bno" type="hidden" value="${boardview.bno}">
-								<a href="#" id="bbp_modify" name="bbp_modify">수정</a>
-								<a href="#" id="bbp_delete" name="bbp_delete">삭제</a>
-								<a href="#" id="bbp_list" name="bbp_list">목록</a>
-								<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i>${boardview.goodcnt}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="#" id="bbp_list" name="bbp_list">목록</a>
-							</c:otherwise>
-						</c:choose>
+					<c:if test="${boardview.writer == sessionScope.loginUser.mid}">
+						<a href="#" id="bbp_modify" name="bbp_modify">수정</a>
+						<a href="#" id="bbp_delete" name="bbp_delete">삭제</a>
+					</c:if>
+					<a href="#" id="bbp_list" name="bbp_list">목록</a>
+					<c:choose>
+						<c:when test="${empty sessionScope.loginUser}">
+							<a href="#" id="bbp_answer_null" name="bbp_answer_null">답변</a>
+						</c:when>
+						<c:otherwise>
+							<a href="answer.bizpoll?bno=${boardview.bno}" id="bbp_answer" name="bbp_answer">답변</a>
+						</c:otherwise>
+					</c:choose>
+					<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i>${boardview.goodcnt}</a>
 				</div>
 				
 				<div class="reply_list" style="margin-top: 30px;">
 					<div class="reply_item">
-						<div style="margin-bottom: 15px;">댓글 수 : ${replycount}</div>
 						
 						<div id="commentList"></div>
 						
@@ -324,7 +343,7 @@ a {
 										<a href="#" id="comment_insert">입력</a>
 									</c:when>
 									<c:otherwise>
-										<a href="index.bipoll" style="color: blue;">로그인</a>을 하시면 댓글을 작성할 수 있습니다.
+										<a id="bbp_login" href="#" style="color: blue;">로그인</a>을 하시면 댓글을 작성할 수 있습니다.
 									</c:otherwise>
 								</c:choose>
 								

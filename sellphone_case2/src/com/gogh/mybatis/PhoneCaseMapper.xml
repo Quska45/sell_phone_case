@@ -51,7 +51,7 @@
 	<!-- 게시물 목록을 띄워주는 sql -->
 	<select id="boardlistALL" resultType="boardDTO">
 		SELECT * FROM tblboard
-		ORDER BY bno DESC
+		ORDER BY ref DESC, re_step ASC 
 	</select>
 	
 	<!-- 글쓰기에서 글을 쓰면 뜨는 글쓰는 창에서 값을 입력하면 디비에 입력해줌 -->
@@ -129,7 +129,7 @@
 							WHERE b.bno = d.bno) replycnt
 					FROM tblboard b
 					WHERE bno > 0
-					ORDER BY bno desc
+					ORDER BY ref desc, re_step
 				) a
 			)
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}
@@ -254,12 +254,26 @@
 		WHERE bno=#{bno}
 	</select>
 	
-	
+	<!-- 게시글 상세 페이지에서 첨부파일을 다운로드 하면 다운로드의 숫자가 하나씩 증가하게 함 -->
 	<update id="downloadcount" parameterType="Integer">
 		UPDATE tblboard
 		SET downcnt = downcnt + 1
 		WHERE bno=#{bno}
 	</update>
+	
+	<!-- 새로운 답글이 들어왔을 때 기존의 답글의 스텝값을 바꿔준다. -->
+	<update id="updateStep">
+		UPDATE tblboard
+		SET re_step = re_step + 1
+		WHERE ref=#{ref} AND re_step >= #{re_step}
+	</update>
+	
+	
+	<!--  -->
+	<insert id="answerInsert" parameterType="boardDTO">
+		INSERT INTO tblboard(bno, title, contents, writer, filename, filesize, ref, re_step, re_level)
+		VALUES((SELECT nvl(max(bno)+1, 1) from tblboard),#{title}, #{contents}, #{writer}, #{filename}, #{filesize}, #{ref},  #{re_step}, #{re_level})
+	</insert>
 	
 </mapper>
 

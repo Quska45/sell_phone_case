@@ -30,8 +30,6 @@ public class ReplyInsertAction implements Action{
 		String content = request.getParameter("content");
 		Integer bno = Integer.parseInt(request.getParameter("bno"));
 		
-		//ReplyInsertAction에서 작업을 마치고 이동할 경로를 지정해준다.
-		String url="boarddetail.bizpoll?bno="+bno;
 		
 		//값을 잘 받아오는지 확인한다.
 		System.out.println("writer" + writer + "content" + content + "bno" + bno);

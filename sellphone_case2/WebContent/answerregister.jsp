@@ -41,7 +41,7 @@ a {
 #contents {
 	padding: 40px;
 	border: 1px solid grey;
-	background: #ffffff;
+	background-color: #ffffff;
 }
 #main_title {
 	font-size: 24px;
@@ -173,11 +173,12 @@ $(document).on("click", "#add_file", function(){
 				<table class="tb1">
 					<tbody>
 						<!-- 파일을 첨부 할 때는 post방식과 enctype이 추가되어야 한다는 것을 명심하자 -->
-						<form name="bbp_frm" id="bbp_frm" action="boardinsertsave2.bizpoll" method="POST" enctype="multipart/form-data">
+						<form name="bbp_frm" id="bbp_frm" action="answerinsertsave.bizpoll" method="POST" enctype="multipart/form-data">
+							<input type="hidden" id="answerregister_bno" name="answerregister_bno" value="${boardview.bno}">
 							<tr>
 								<th>Title</th>
 								<td class="tb_tit">
-								 	<input type="text" id="bbp_title" name="bbp_title" placeholder="제목을 입력하세요.">
+								 	<input type="text" id="bbp_title" name="bbp_title" placeholder="제목을 입력하세요." value="RE:${boardview.title}">
 								</td>
 							</tr>
 							
@@ -186,7 +187,7 @@ $(document).on("click", "#add_file", function(){
 								<td style="padding: 10px;">
 									<div class="add_file">
 									<input class="add_file" value="파일선택">
-									<input class="file_name">
+									<input class="file_name" value="${boardview.filename}">
 									<label class="add_file_label" for="add_file"></label>
 									<input id="add_file" name="add_file" type="file">
 									</div>
@@ -196,7 +197,9 @@ $(document).on("click", "#add_file", function(){
 							<tr>
 								<th>Content</th>
 								<td class="tb_tit">
-									<textArea type="text" id="bbp_content" name="bbp_content" placeholder="내용을 입력하세요."></textArea>
+									<textArea type="text" id="bbp_content" name="bbp_content">
+										${boardview.contents}
+									</textArea>
 								</td>
 							</tr>
 							
@@ -210,7 +213,7 @@ $(document).on("click", "#add_file", function(){
 					</tbody>
 				</table>
 				<div class="allButton">
-					<a class="bbr_submit" href="#">등록</a>
+					<a class="bbr_submit" href="#">답글 등록</a>
 				</div>
 			</div>
 		</div>

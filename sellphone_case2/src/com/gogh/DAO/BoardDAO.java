@@ -355,7 +355,7 @@ public class BoardDAO {
 			return filename;
 		}
 		
-		
+		//게시글 상세 페이지에서 첨부파일을 다운로드 하면 다운로드의 숫자가 하나씩 증가하게 함
 		public void boardDowncnt(Integer bno) {
 			sqlSession = sqlSessionFactory.openSession();
 			try {
@@ -373,6 +373,42 @@ public class BoardDAO {
 				sqlSession.close();
 			}
 			
+		}
+		
+		
+		//답글의 순서를 조정 해줌
+		public void updateStep(int ref, int re_step) {
+			sqlSession = sqlSessionFactory.openSession();
+			try {
+				BoardDTO bDto = new BoardDTO();
+				bDto.setRef(ref);
+				bDto.setRe_step(re_step);
+				sqlSession.update("updateStep", bDto);
+				sqlSession.commit();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+		}
+		
+		
+		//
+		public int answerInsert(BoardDTO bDto) {
+			sqlSession = sqlSessionFactory.openSession();
+			int result = 0;
+			try {
+				result = sqlSession.insert("answerInsert", bDto);
+				sqlSession.commit();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				if(sqlSession != null) sqlSession.close();
+			}
+			return result;
 		}
 		
 }

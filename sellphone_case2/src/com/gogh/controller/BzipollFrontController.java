@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gogh.action.Action;
 import com.gogh.action.ActionForward;
+import com.gogh.action.AnswerAction;
+import com.gogh.action.AnswerInsertSaveAction;
 import com.gogh.action.BoardDeleteAction;
 import com.gogh.action.BoardDeleteAction2;
 import com.gogh.action.BoardDetailAction;
@@ -281,6 +283,20 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/download.bizpoll")) {
 			System.out.println("컨트롤러의 if - download.bizpoll이 정상적으로 실행됩니다.");
 			action = new DownloadAction();
+			forward = action.excute(request, response);
+		}
+		
+		//게시글 상세 페이지에서 답변을 클릭하면 답변을 등록하는 페이지로 간다.
+		else if(command.equals("/answer.bizpoll")) {
+			System.out.println("컨트롤러의 if - answer.bizpoll이 정상적으로 실행됩니다.");
+			action = new AnswerAction();
+			forward = action.excute(request, response);
+		}
+		
+		//답변 작성 페이지에서 답변등록이 제대로 될 수 있도록 한다.
+		else if(command.equals("/answerinsertsave.bizpoll")) {
+			System.out.println("컨트롤러의 if - answerinsertsave.bizpoll이 정상적으로 실행됩니다.");
+			action = new AnswerInsertSaveAction();
 			forward = action.excute(request, response);
 		}
 		

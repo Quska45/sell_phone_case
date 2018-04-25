@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div style="margin-bottom: 15px;">댓글 수 : ${replycount}</div>
 	<div>
 		<c:forEach items="${replyview}" var="replyview">
 			<div class="comment_list">
