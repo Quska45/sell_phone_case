@@ -43,6 +43,7 @@ import com.gogh.action.LoginOutAction;
 import com.gogh.action.MemAjaxAction;
 import com.gogh.action.MemberInsertAction;
 import com.gogh.action.MyPageAction;
+import com.gogh.action.MypagePasswordUpdateAction;
 import com.gogh.action.MypageUpdateAction;
 import com.gogh.action.ReplyDeleteAction;
 import com.gogh.action.ReplyInsertAction;
@@ -313,6 +314,12 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/mypageupdate.bizpoll")) {
 			System.out.println("컨트롤러의 if - mypageupdate.bizpoll이 정상적으로 실행됩니다.");
 			action = new MypageUpdateAction();
+			forward = action.excute(request, response);
+		}
+		
+		else if(command.equals("/mypage_password_update.bizpoll")) {
+			System.out.println("컨트롤러의 if - mypage_password_update.bizpoll이 정상적으로 실행됩니다.");
+			action = new MypagePasswordUpdateAction();
 			forward = action.excute(request, response);
 		}
 		

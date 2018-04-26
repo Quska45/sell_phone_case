@@ -148,6 +148,7 @@ a {
 	$(document).ready(function(){
 		comment_list();
 	});
+	
 	function comment_list(){
 		var bno = ${boardview.bno};
 		

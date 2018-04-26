@@ -120,65 +120,58 @@ a {
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).on("click", ".password_update_ok_btn", function(){
 	var old_pw = $("#old_password").val();
 	var new_pw = $("#new_password").val();
 	var new_confirm_pw = $("#new_password_confirm").val();
+	var id = ${sessionScope.loginUser.mid}; 
+	alert("test");
 	
-	$("#old_password").blur(function(){
-		if(old_pw == ""){
-			$(".Old_Err_ck").text("현재 비밀번호가 입력되지 않았습니다.").css("display", "block").css("color", "red");
-		} else if(old_pw != "") {
-			$(".Old_Err_ck").text("현재 비밀번호가 입력되지 않았습니다.").css("display", "none");
-		}
-	});
+	if(old_pw == ""){
+		$(".Old_Err_ck").text("현재 비밀번호가 입력되지 않았습니다.").css("display", "block").css("color", "red");
+		$(".Old_Err_ck").focus();
+		return false;
+	} else if(old_pw != "") {
+		$(".Old_Err_ck").text("현재 비밀번호가 입력되지 않았습니다.").css("display", "none");
+	}
 	
-	$("#new_password").blur(function(){
-		if(new_pw == ""){
-			$(".New_Err_ck").text("새 비밀번호가 입력되지 않았습니다.").css("display", "block").css("color", "red");
-		} else if(new_pw != "") {
-			$(".New_Err_ck").text("새 비밀번호가 입력되지 않았습니다.").css("display", "none");
-		}
-	});
+	if(new_pw == ""){
+		$(".New_Err_ck").text("새 비밀번호가 입력되지 않았습니다.").css("display", "block").css("color", "red");
+		$(".New_Err_ck").focus();
+		return false;
+	} else if(new_pw != "") {
+		$(".New_Err_ck").text("새 비밀번호가 입력되지 않았습니다.").css("display", "none");
+	} 
 	
-	$("#new_password_confirm").blur(function(){
-		if(new_confirm_pw == ""){
-			$(".New_Confirm_Err_ck").text("새 비밀번호 확인이 입력되지 않았습니다.").css("display", "block").css("color", "red");
-		} else if(new_confirm_pw != "") {
-			$(".New_Confirm_Err_ck").text("새 비밀번호 확인이 입력되지 않았습니다.").css("display", "none");
-		}
-	});
-});
-
-
-$(document).on("click", ".password_update_ok_btn", function(){
-	var new_pw = $("#new_password").val();
-	var new_pw_confirm = $("#new_password_confirm").val();
-	alert(old_pw + new_pw + new_pw_confirm);
+	if(new_confirm_pw == ""){
+		$(".New_Confirm_Err_ck").text("새 비밀번호 확인이 입력되지 않았습니다.").css("display", "block").css("color", "red");
+		$(".New_Confirm_Err_ck").focus();
+		return false;
+	} else if(new_confirm_pw != "") {
+		$(".New_Confirm_Err_ck").text("새 비밀번호 확인이 입력되지 않았습니다.").css("display", "none");
+	}
+	
+	if(new_pw != new_confirm_pw) {
+		$(".New_Err_ck").text("비밀번호가 다릅니다.").css("display", "block").css("color", "red");
+		$(".New_Err_ck").focus();
+		return false;
+	} else if(new_pw == new_confirm_pw) {
+		$(".New_Err_ck").text("비밀번호가 다릅니다.").css("display", "none").css("color", "red");
+	}
 	
 	
-	
-	/* $.ajax({
-		url: "loginajax.bizpoll",
+	$.ajax({
+		url: "mypage_password_update.bizpoll",
 		type: "POST",
 		dataType :  "JSON",
-		data: "id=" + lid + "&pw=" + lpw,
+		data: "old_pw=" + old_pw + "&new_pw=" + new_pw + "&new_confirm_pw=" + new_confirm_pw + "&id=" + id,
 		success: (function(data){
-			if(data.id != null && data.pw != null) {
-				alert("로그인 성공");
-				//index 페이지로 이동
-				location.reload();
-			} else {
-				alert("로그인실패");
-				$("#login_id").select();
-				$("#ErrCk").css("display", "block");
-				
-			}
+			location.href="mypagemain.jsp";
 		}),
 		error: function(){
 			alert("system error");
 		}
-	}); */
+	}); 
 });
 
 </script>

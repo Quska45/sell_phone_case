@@ -219,6 +219,28 @@ public class MemberDAO {
 				sqlSession.close();
 			}
 		}
+		
+		//MypagePasswordUpdateAction에서 기존 PW와 수정하고자 하는 PW를 입력받아 패스워드를 수정하는 메소드이다.
+		public void memPwUpdate(String mid, String mpw) { 
+			sqlSession = sqlSessionFactory.openSession();
+			try {
+				MemberDTO mDto  = new MemberDTO();
+				mDto.setMid(mid);
+				mDto.setMpw(mpw);
+				result = sqlSession.update("memPwUpdate", mDto);
+				sqlSession.commit();
+				if(result > 0){
+					System.out.println("비밀번호 업데이트 성공");
+				} else {
+					System.out.println("비밀번호 업데이트 실패");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+		}
 	
 	
 }

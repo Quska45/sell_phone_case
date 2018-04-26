@@ -14,7 +14,7 @@ public class LoginAction implements Action{
 		// TODO Auto-generated method stub
 		//로그인화면을 띄워주는 용도이다.
 		
-		String url = "login.jsp";
+		String url = "mypagemain.jsp";
 		
 		ActionForward forward = new ActionForward();
 		

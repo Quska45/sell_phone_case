@@ -281,6 +281,14 @@
 		SET mphone=#{mphone}, mjuso=#{mjuso}, memail=#{memail}
 		WHERE mid=#{mid}
 	</update>
+	
+	<!-- 새로입력받은 비밀번호로 회원 정보를 변경한다. -->
+	<update id="memPwUpdate" parameterType="memDTO">
+		UPDATE member
+		SET mpw=#{mpw}
+		WHERE mid=#{mid}
+	</update>
+	
 </mapper>
 
 

@@ -79,13 +79,14 @@ a {
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+
 $(document).on("click", "#mypage_password_confirm", function(){
-	if(${sessionScope.loginUser.mpw} == $("#mypage_password").val()){
+	if($("#mypage_password").val() == ${sessionScope.loginUser.mpw}){
 		location.href="mypageupdate.jsp";
 	} else {
 		$("#mypage_password_error").css("display", "block");
 	}
-});
+}); 
 
 
 </script>
