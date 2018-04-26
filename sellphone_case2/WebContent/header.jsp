@@ -548,6 +548,7 @@ body, ul {
 	
 	});
 	
+	//로그인 할 때 유효성 체크 하고 성공하면 로그인 하는 코드
 	$(document).on("click", "#btn_login", function(){
 		var id = $("#login_id");
 		var pw = $("#login_pw");

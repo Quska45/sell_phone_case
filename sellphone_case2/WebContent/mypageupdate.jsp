@@ -93,6 +93,12 @@ a {
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+$(document).on("click", "#mypageupdate_ok_btn", function(){
+	$("#mypageupdate").submit();
+})
+
+
+
 </script>
 </head>
 <body>
@@ -112,12 +118,14 @@ a {
 				</h1>
 				<div id="clearfix">
 					<div id="mypage_modify">
+						<form action="mypageupdate.bizpoll" name="mypageupdate" id="mypageupdate" method="POST">
 						<table class="tbl_form">
 							<tbody>
 								<tr>
 									<th>아이디<span style="color: #fda101;">*</span></th>
 									<td>
 										<div class="mypageColum">
+											<input id="mypageColum_input_id" name="mypageColum_input_id" type="hidden" value="${sessionScope.loginUser.mid}">
 											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
 										</div>
 									</td>
@@ -126,31 +134,8 @@ a {
 									<th>이름<span style="color: #fda101;">*</span></th>
 									<td>
 										<div class="mypageColum">
-											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th>전화번호<span style="color: #fda101;">*</span></th>
-									<td>
-										<div class="mypageColum">
-											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th>주소<span style="color: #fda101;">*</span></th>
-									<td>
-										<div class="mypageColum">
-											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th>이메일<span style="color: #fda101;">*</span></th>
-									<td>
-										<div class="mypageColum">
-											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
+											<input id="mypageColum_input_name" name="mypageColum_input_name" type="hidden" value="${sessionScope.loginUser.mname}">
+											<span id="mypageColum_name">${sessionScope.loginUser.mname}</span>
 										</div>
 									</td>
 								</tr>
@@ -158,12 +143,42 @@ a {
 									<th>생년월일<span style="color: #fda101;">*</span></th>
 									<td>
 										<div class="mypageColum">
-											<span id="mypageColum_id">${sessionScope.loginUser.mid}</span>
+											<input id="mypageColum_input_birth" name="mypageColum_input_birth" type="hidden" value="${sessionScope.loginUser.mbirth}">
+											<span id="mypageColum_birth">${sessionScope.loginUser.mbirth}</span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>전화번호</th>
+									<td>
+										<div class="mypageColum">
+											<input id="mypageColum_input_phone" name="mypageColum_input_phone" value="${sessionScope.loginUser.mphone}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>주소</th>
+									<td>
+										<div class="mypageColum">
+											<input id="mypageColum_input_juso" name="mypageColum_input_juso" value="${sessionScope.loginUser.mjuso}">
+										</div>
+									</td>
+								</tr>
+								<tr style="border-bottom: 2px solid #9ea0a3;">
+									<th>이메일</th>
+									<td>
+										<div class="mypageColum">
+											<input id="mypageColum_input_email" name="mypageColum_input_email" value="${sessionScope.loginUser.memail}">
 										</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						</form>
+						<div class="mypageupdate_btn_div">
+							<a href="#" id="mypageupdate_ok_btn">저장</a>
+							<a href="#" id="mypageupdate_cancel_btn">취소</a>
+						</div>
 					</div>
 				</div>
 

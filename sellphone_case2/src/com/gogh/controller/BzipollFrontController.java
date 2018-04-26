@@ -43,6 +43,7 @@ import com.gogh.action.LoginOutAction;
 import com.gogh.action.MemAjaxAction;
 import com.gogh.action.MemberInsertAction;
 import com.gogh.action.MyPageAction;
+import com.gogh.action.MypageUpdateAction;
 import com.gogh.action.ReplyDeleteAction;
 import com.gogh.action.ReplyInsertAction;
 import com.gogh.action.TestLoginAction;
@@ -305,6 +306,13 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/mypage.bizpoll")) {
 			System.out.println("컨트롤러의 if - mypage.bizpoll이 정상적으로 실행됩니다.");
 			action = new MyPageAction();
+			forward = action.excute(request, response);
+		}
+		
+		//개인정보수정에서 저장을 누르면 개인정보를 수정하게 해준다.
+		else if(command.equals("/mypageupdate.bizpoll")) {
+			System.out.println("컨트롤러의 if - mypageupdate.bizpoll이 정상적으로 실행됩니다.");
+			action = new MypageUpdateAction();
 			forward = action.excute(request, response);
 		}
 		

@@ -269,12 +269,18 @@
 	</update>
 	
 	
-	<!--  -->
+	<!-- 최종적으로 완성된 답글을 디비에 넣어준다. -->
 	<insert id="answerInsert" parameterType="boardDTO">
 		INSERT INTO tblboard(bno, title, contents, writer, filename, filesize, ref, re_step, re_level)
 		VALUES((SELECT nvl(max(bno)+1, 1) from tblboard),#{title}, #{contents}, #{writer}, #{filename}, #{filesize}, #{ref},  #{re_step}, #{re_level})
 	</insert>
 	
+	<!-- 수정된 회원정보를 업데이트 시켜준다. -->
+	<update id="mypageupdate" parameterType="memDTO">	
+		UPDATE member
+		SET mphone=#{mphone}, mjuso=#{mjuso}, memail=#{memail}
+		WHERE mid=#{mid}
+	</update>
 </mapper>
 
 

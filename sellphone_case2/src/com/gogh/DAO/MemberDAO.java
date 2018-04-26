@@ -199,7 +199,26 @@ public class MemberDAO {
 			return mDto;
 		}
 	
-	
+		
+		//MypageUpdateAction에서 수정된 회원정보를 받아오면 그걸 가지고 여기서 디비를 업데이트 한다.
+		public void memUpdate(MemberDTO mDto) {
+			sqlSession=sqlSessionFactory.openSession();
+			try {
+				result = sqlSession.update("mypageupdate", mDto);
+				if(result > 0) {
+					System.out.println("회원정보수정완료");
+				} else {
+					System.out.println("회원정보 수정실패");
+				}
+				
+				sqlSession.commit();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+		}
 	
 	
 }

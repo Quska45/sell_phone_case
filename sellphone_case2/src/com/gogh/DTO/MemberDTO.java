@@ -30,6 +30,15 @@ public class MemberDTO {
 		this.memail = memail;
 	}
 	
+	public MemberDTO(String mid, String mname, String mphone, String mjuso, String memail, String mbirth) {
+		super();
+		this.mid = mid;
+		this.mname = mname;
+		this.mphone = mphone;
+		this.mjuso = mjuso;
+		this.memail = memail;
+		this.mbirth = mbirth;
+	}
 	
 	public MemberDTO(String mid, String mpw, String mname, String mphone, String mjuso, String memail, String mbirth,
 			Date regdate) {
