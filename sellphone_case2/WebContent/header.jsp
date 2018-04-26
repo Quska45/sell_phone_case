@@ -272,11 +272,7 @@ body, ul {
 		border-bottom: 1px solid #dadada;
 		overflow: hidden;/* 내용물이 넘치면 안보이게 하라는 것 */
 	}
-	h1 {
-		float: left;
-		margin-left: 25px;
-		margin-top: 0;
-	}
+	
 	a#kakao_logo {
 		float: left;
 		height: 22px;
@@ -630,7 +626,10 @@ body, ul {
 	
 		<div id="kakao_header"><!-- 말그대로 헤더 -->
 		<span class="close">&times;</span>
-			<h1><!-- 더 크게 만들어 준다. -->
+		float: left;
+		margin-left: 25px;
+		margin-top: 0;
+			<h1 style="float: left; margin-left: 25px; margin-top: 0;"><!-- 더 크게 만들어 준다. -->
 				<a id="kakao_logo" href="#">
 					<img src="image/case/vincent.png">
 					<span>로그인</span>
@@ -729,9 +728,10 @@ body, ul {
               	</c:choose>
                    
                    <li id="li_drop">
-                        <a href="boardlist2.bizpoll">마이페이지▼</a>
+                        <a href="mypage.bizpoll">마이페이지▼</a>
                         <div id="dropdown">
                              <ul>
+                                  <li><a href="#">주문/배송조회</a></li>
                                   <li><a href="#">주문/배송조회</a></li>
                                   <li><a href="#">장바구니</a></li>
                                   <li><a href="#">위시리스트</a></li>
@@ -739,7 +739,7 @@ body, ul {
                              </ul>
                         </div>
                    </li>
-                   <li><a href="boardlist.bizpoll">고객행복센터</a></li>
+                   <li><a href="boardlist2.bizpoll">고객행복센터</a></li>
               </ul>
           </div>
      </div>

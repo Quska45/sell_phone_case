@@ -176,8 +176,7 @@ a {
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	//글쓰기 버튼을 눌렀을 때 로그인이 되어 있다면 게시글을 등록하는 페이지로 넘어가는 서블릿을 타게함 
-	$("#write").on("click", function() {
-		alert("게시글 등록 버튼 잘 눌림");
+	$(document).on("click", "#write",function() {
 		location.href = "boardinsertview2.bizpoll";
 		submit();
 	});
@@ -224,15 +223,12 @@ a {
 </script>
 </head>
 <body>
-<%
-    request.setCharacterEncoding("UTF-8");
-%>
 	<div id="page1">
 		<div id="page2">
 			<div id="contents">
 				<div id="select_category">
 					<div class="category_attr">
-						<a id="category1" href="#">공지사항</a>
+						<a id="category1" href="#">자유게시판</a>
 					</div>
 					<div class="category_attr">
 						<a id="category2" href="#">질의응답</a>
@@ -246,7 +242,7 @@ a {
 				</div>
 				
 				<div id="board_title">
-				공지사항
+				자유게시판
 				</div>
 				
 				<!-- 검색 입력란 -->

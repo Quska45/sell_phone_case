@@ -42,6 +42,7 @@ import com.gogh.action.LoginCkAction;
 import com.gogh.action.LoginOutAction;
 import com.gogh.action.MemAjaxAction;
 import com.gogh.action.MemberInsertAction;
+import com.gogh.action.MyPageAction;
 import com.gogh.action.ReplyDeleteAction;
 import com.gogh.action.ReplyInsertAction;
 import com.gogh.action.TestLoginAction;
@@ -297,6 +298,13 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/answerinsertsave.bizpoll")) {
 			System.out.println("컨트롤러의 if - answerinsertsave.bizpoll이 정상적으로 실행됩니다.");
 			action = new AnswerInsertSaveAction();
+			forward = action.excute(request, response);
+		}
+		
+		//header의 마이페이지를 누르면 마이페이지로 이동한다.
+		else if(command.equals("/mypage.bizpoll")) {
+			System.out.println("컨트롤러의 if - mypage.bizpoll이 정상적으로 실행됩니다.");
+			action = new MyPageAction();
 			forward = action.excute(request, response);
 		}
 		

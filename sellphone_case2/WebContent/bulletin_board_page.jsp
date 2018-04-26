@@ -165,7 +165,6 @@ a {
 	//댓글 삭제 버튼을 클릭하면 댓글이 삭제되도록 하는 ajax
 	$(document).on("click", ".relpy_del", function(){
 		var rno = $(this).attr("data_num");
-
 		$.ajax({
 			url: "replydelete.bizpoll",
 			type: "POST",
@@ -210,25 +209,29 @@ a {
 	//게시글 삭제를 클릭하면 bno를 액션으로 보내고 게시글을 삭제한 후 게시글 리스트로 이동하게 한다.
 	$(document).on("click", "#bbp_delete", function(){
 		var bno = ${boardview.bno};
-		alert(bno);
+		var replycount = ${replycount};
 		
-		$.ajax({
-			url: "boarddelete2.bizpoll",
-			type: "POST",
-			dataType :  "JSON",
-			data: "bno=" + bno,
-			success: (function(data){
-				if(data.result > "0") {
-					location.href="boardlist2.bizpoll";
-				} else{
-					location.href="boarddetail2.bizpoll?bno="+bno;
+		if(replycount != 0){
+			alert("댓글이 있는 글은 삭제할 수 없습니다.");
+			location.reload();
+		} else if(replycount == 0) {
+			$.ajax({
+				url: "boarddelete2.bizpoll",
+				type: "POST",
+				dataType :  "JSON",
+				data: "bno=" + bno,
+				success: (function(data){
+					if(data.result > "0") {
+						location.href="boardlist2.bizpoll";
+					} else{
+						location.href="boarddetail2.bizpoll?bno="+bno;
+					}
+				}),
+				error: function(){
+					alert("system error");
 				}
-			}),
-			error: function(){
-				alert("system error");
-			}
-		});
-		
+			});
+		}
 	});
 	
 	
@@ -244,7 +247,7 @@ a {
 				if(data.favoritecount > 0) {
 					location.reload();
 				} else {
-					alert("실패");
+					alert("좋아요는 24시간에 한 번 추가 할 수 있습니다.");
 				}
 			}),
 			error: function(){
@@ -276,7 +279,7 @@ a {
 	<div id="page1">
 		<div id="page2">
 			<div id="contents">
-				<h1 id="main_title">공지사항</h1>
+				<h1 id="main_title">자유게시판</h1>
 				<table class="tb1">
 					<tbody>
 						<tr>
@@ -324,6 +327,7 @@ a {
 						</c:otherwise>
 					</c:choose>
 					<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i>${boardview.goodcnt}</a>
+					<span>${replycount}</span>
 				</div>
 				
 				<div class="reply_list" style="margin-top: 30px;">
