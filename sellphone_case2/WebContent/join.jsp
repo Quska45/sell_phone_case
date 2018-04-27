@@ -289,6 +289,11 @@
 			var emailAddress = $("#emailAddress").val();
 			var fullEmail = $("#email").val() + "@" + $("#emailAddress").val();
 			
+			//년, 월, 일 정보를 받아온다.
+			var day = $("#sel_year").val() + $(".sel_month").val() + $("#sel_day").val();
+			alert(day);
+			
+			
 			//var idckval = $(#"idckval");
 			
 			//패스워드의 유형성 체크를 위해서 선언한 변수 - 영문과 숫자를 조합해 6~20자리 까지 가능하다.
@@ -329,7 +334,8 @@
 			} else if(flag != 1){
 				alert("아이디 중복체크를 하세요.");
 				return false;
-			} else {
+			}
+			else {
 				alert("유효성체크를 모두 완료했습니다.");
 				$("form").submit();
 			}			
@@ -494,14 +500,14 @@
                                                                      </div>
                                                                      <div class="bir_yy">
                                                                            <span class="ps_box">
-                                                                                  <input type="text" id="yy" placeholder="년(4자)" class="int">
+                                                                                  <input type="text" id="yy" id="sel_year" name="sel_year"  placeholder="년(4자)" class="int">
                                                                                   <!-- <label id="yyLb" for="yy" class="1b1">년(4자)</label> -->
                                                                             </span>
                                                                      </div>
                                                                      <span class="cell"><!-- | --></span>
                                                                      <div class="bir_mm">
                                                                            <span class="ps_box">
-                                                                                  <select id="mm" title="월" class="sel" onchange="checkBirthday('check')">
+                                                                                  <select id="mm" title="월" class="sel_month" onchange="checkBirthday('check')">
                                                                                          <option value>월</option>
                                                                                          <option value>1</option>
                                                                                          <option value>2</option>
@@ -521,7 +527,7 @@
                                                                      <span class="cell"><!-- | --></span>
                                                                      <div class="bir_dd">
                                                                            <span class="ps_box">
-                                                                                  <input type="text" id="dd" placeholder="일" class="int">
+                                                                                  <input type="text" id="dd" id="sel_day" name="sel_day" placeholder="일" class="int">
                                                                             </span>
                                                                      </div>
                                                               </div>
