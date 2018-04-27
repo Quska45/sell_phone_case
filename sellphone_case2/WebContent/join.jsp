@@ -290,8 +290,9 @@
 			var fullEmail = $("#email").val() + "@" + $("#emailAddress").val();
 			
 			//년, 월, 일 정보를 받아온다.
-			var day = $("#sel_year").val() + $(".sel_month").val() + $("#sel_day").val();
-			alert(day);
+			var year = $("#sel_year").val();
+			var month = $(".sel_month").val();
+			var day = $("#sel_day").val();
 			
 			
 			//var idckval = $(#"idckval");
@@ -334,7 +335,8 @@
 			} else if(flag != 1){
 				alert("아이디 중복체크를 하세요.");
 				return false;
-			}
+			} 
+			
 			else {
 				alert("유효성체크를 모두 완료했습니다.");
 				$("form").submit();
@@ -527,7 +529,7 @@
                                                                      <span class="cell"><!-- | --></span>
                                                                      <div class="bir_dd">
                                                                            <span class="ps_box">
-                                                                                  <input type="text" id="dd" id="sel_day" name="sel_day" placeholder="일" class="int">
+                                                                                  <input type="text" id="dd" id="sel_day" placeholder="일" class="int">
                                                                             </span>
                                                                      </div>
                                                               </div>
