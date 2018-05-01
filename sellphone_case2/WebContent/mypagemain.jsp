@@ -80,13 +80,19 @@ a {
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
+//비밀번호를 입력하고 확인을 누르면 개인정보 수정페이지로 가거나 에러 메세지 출력
 $(document).on("click", "#mypage_password_confirm", function(){
-	if($("#mypage_password").val() == ${sessionScope.loginUser.mpw}){
+	var pw = ${sessionScope.loginUser.mpw};
+	if($("#mypage_password").val() == pw){
 		location.href="mypageupdate.jsp";
 	} else {
 		$("#mypage_password_error").css("display", "block");
 	}
 }); 
+
+$(document).on("click", ".mypagemain_err", function(){
+	alert("비밀번호 확인을 해주세요.");
+});
 
 
 </script>
@@ -97,10 +103,10 @@ $(document).on("click", "#mypage_password_confirm", function(){
 			<div id="contents">
 				<div id="select_category">
 					<div class="category_attr">
-						<a id="category1" href="#">개인정보수정</a>
+						<a class="mypagemain_err" id="category1" href="#">개인정보수정</a>
 					</div>
 					<div class="category_attr">
-						<a id="category2" href="#">비밀번호변경</a>
+						<a class="mypagemain_err" id="category2" href="#">비밀번호변경</a>
 					</div>
 				</div>
 				<h1 id="mypage_title" style="display: block;">

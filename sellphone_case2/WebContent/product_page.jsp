@@ -24,6 +24,7 @@ body, th, span, a, div {
 tr {
 	height: 40px;
 	text-align: center;
+	border-bottom: 1px solid black;
 }
 table {
 	border-collapse: collapse;
@@ -51,6 +52,7 @@ a {
 .big_con_right{
 	position: absolute;
     top: 50%;
+    left: 95%;
     width: 27px;
     height: 44px;
     margin-top: -22px;
@@ -59,6 +61,7 @@ a {
 .big_con_left {
 	position: absolute;
     top: 50%;
+    left: 15px;
     width: 27px;
     height: 44px;
     margin-top: -22px;
@@ -75,6 +78,7 @@ a {
 	width: 576px;
 	float: left;
 	padding-left: 13px;
+	position: relative;
 }
 .con_right_section_top {
 	border-bottom: 2px solid #181717;
@@ -88,7 +92,18 @@ a {
     margin-bottom: 5px!important;
 	
 }
+.pp_btn_style {
+	display: block;
+    float: left;
+    margin-right: 44px;
+    padding: 10px 10px;
+    line-height: 25px;
+    border: 1px solid;
+    color: white!important;
+}
 /* 상품이미지 옆에 구매와 관련한 정보창 끝 */
+
+
 
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
@@ -108,7 +123,7 @@ a {
 								<div class="big_con_img_wrap">
 									<div class="big_con_img"><img src="./image/case/case01.png" style="width: 500px; height: 500px;"></div>
 									<div class="big_con_right">></div>
-									<div class="big_con_left">></div>
+									<div class="big_con_left"><</div>
 								</div>
 								<div class="small_con_img">
 									<img src="./image/case/case01.png" style="width: 100px; height: 100px; padding-left: 40%; padding-top: 12px;">
@@ -121,7 +136,7 @@ a {
 							<div class="con_right_section_top">
 								<p class="goods_title">카드케이스 백목련(핑크)</p>
 							</div>
-							<table class="con_right_section_table">
+							<table class="con_right_section_table" style="position: absolute; left: 100px;">
 								<tbody>
 									<tr>
 										<th>판매가</th>
@@ -133,7 +148,7 @@ a {
 									</tr>
 									<tr>
 										<th>사은품</th>
-										<td>23,000원 이상 구매 시 사은품_쇼핑백 小 1개 선택</td>
+										<td>23,000원 이상 구매 시 사은품 쇼핑백 증정</td>
 									</tr>
 									<tr>
 										<th>배송</th>
@@ -147,10 +162,12 @@ a {
 										<th>상품정보</th>
 										<td>전자상거래 상품정보 제공 고시 정보</td>
 									</tr>
-									<tr>
+									<tr style="border: none;">
 										<th>상품옵션</th>
 										<td>상품옵션을 선택해 주세요</td>
-										<th>기종</th>
+									</tr>
+									<tr>
+										<td>기종</td>
 										<td>
 											<select>
 												<option>- 기종 선택 -</option>
@@ -161,12 +178,13 @@ a {
 											</select>
 										</td>
 									</tr>
-									<tr>
-										
-									</tr>
 								</tbody>
 							</table>
-							<div class="SNS_div"></div>
+							<div class="buy_button_wrap" style="position: absolute; top: 443px; left: 108px;">
+								<a href="#" class="pp_btn_style" id="pp_buy_btn" style="background: black">바로구매</a>
+								<a href="#" class="pp_btn_style" id="pp_basket_btn" style="background: #666">장바구니</a>
+								<a href="#" class="pp_btn_style" id="pp_goodcnt_btn" style="background: #585f69">좋아요♡</a>
+							</div>
 							
 						
 						</div>

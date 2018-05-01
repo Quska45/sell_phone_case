@@ -163,10 +163,13 @@ public class MemberDAO {
 					for(MemberDTO mDto2 : list) {
 						String id = mDto2.getMid();
 						String pw = mDto2.getMpw();
+						String phone = mDto2.getMphone();
+						String juso = mDto2.getMjuso();
+						String birth = mDto2.getMbirth();
 						String name = mDto2.getMname();
 						String email = mDto2.getMemail();
 						
-						mDtoLogin = new MemberDTO(id, pw, name, email);
+						mDtoLogin = new MemberDTO(id, pw, name, phone, juso, email, birth);
 					}
 				}
 				

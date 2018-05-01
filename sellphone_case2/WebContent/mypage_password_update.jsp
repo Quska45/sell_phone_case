@@ -181,10 +181,10 @@ $(document).on("click", ".password_update_ok_btn", function(){
 			<div id="contents">
 				<div id="select_category">
 					<div class="category_attr">
-						<a id="category1" href="#">개인정보수정</a>
+						<a id="category1" href="mypageupdate.jsp">개인정보수정</a>
 					</div>
 					<div class="category_attr">
-						<a id="category2" href="#">비밀번호변경</a>
+						<a id="category2" href="mypage_password_update.jsp">비밀번호변경</a>
 					</div>
 				</div>
 				<h1 id="mypage_title" style="display: block;">

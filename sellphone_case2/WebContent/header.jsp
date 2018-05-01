@@ -719,7 +719,7 @@ body, ul {
                         <a id="header_mypage" href="#">마이페이지▼</a>
                         <div id="dropdown">
                              <ul>
-                                  <li><a href="#">주문/배송조회</a></li>
+                                  <li><a href="#">개인정보수정</a></li>
                                   <li><a href="#">주문/배송조회</a></li>
                                   <li><a href="#">장바구니</a></li>
                                   <li><a href="#">위시리스트</a></li>
@@ -751,7 +751,7 @@ body, ul {
      <div id="category" class="inner">
           <div id="head_inner">
               <ul>
-                   <li class="line3_li"><a href="#" id="iphone8">iphone8</a>
+                   <li class="line3_li"><a href="product_page.jsp" id="iphone8">iphone8</a>
                         <div class="category_drop">
                              <a href="#">범퍼케이스</a>
                              <a href="#">젤리케이스</a>
@@ -759,7 +759,7 @@ body, ul {
                              <a href="#">기능형케이스</a>
                         </div>
                    </li>
-                   <li class="line3_li"><a href="#">iphone8+</a>
+                   <li class="line3_li"><a href="product_page.jsp">iphone8+</a>
                         <div class="category_drop">
                              <a href="#">범퍼케이스</a>
                              <a href="#">젤리케이스</a>
@@ -767,7 +767,7 @@ body, ul {
                              <a href="#">기능형케이스</a>
                         </div>
                    </li>
-                   <li class="line3_li"><a href="#">iphoneX</a>
+                   <li class="line3_li"><a href="product_page.jsp">iphoneX</a>
                         <div class="category_drop">
                              <a href="#">범퍼케이스</a>
                              <a href="#">젤리케이스</a>
@@ -775,7 +775,7 @@ body, ul {
                              <a href="#">기능형케이스</a>
                         </div>
                    </li>
-                   <li class="line3_li"><a href="#">galaxy8</a>
+                   <li class="line3_li"><a href="product_page.jsp">galaxy8</a>
                         <div class="category_drop">
                              <a href="#">범퍼케이스</a>
                              <a href="#">젤리케이스</a>
@@ -783,7 +783,7 @@ body, ul {
                              <a href="#">기능형케이스</a>
                         </div>
                    </li>
-                   <li class="line3_li"><a href="#">galaxy8+</a>
+                   <li class="line3_li"><a href="product_page.jsp">galaxy8+</a>
                         <div class="category_drop">
                              <a href="#">범퍼케이스</a>
                              <a href="#">젤리케이스</a>
