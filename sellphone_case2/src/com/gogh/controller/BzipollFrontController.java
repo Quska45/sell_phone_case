@@ -13,23 +13,16 @@ import com.gogh.action.Action;
 import com.gogh.action.ActionForward;
 import com.gogh.action.AnswerAction;
 import com.gogh.action.AnswerInsertSaveAction;
-import com.gogh.action.BoardDeleteAction;
 import com.gogh.action.BoardDeleteAction2;
-import com.gogh.action.BoardDetailAction;
 import com.gogh.action.BoardDetailAction2;
 import com.gogh.action.BoardFavoriteAction;
-import com.gogh.action.BoardInsertSaveAction;
 import com.gogh.action.BoardInsertSaveAction2;
-import com.gogh.action.BoardInsertViewAction;
 import com.gogh.action.BoardInsertViewAction2;
-import com.gogh.action.BoardListAction;
 import com.gogh.action.BoardListAction2;
 import com.gogh.action.BoardListSortAction;
-import com.gogh.action.BoardSearchAction;
 import com.gogh.action.BoardSearchAction2;
 import com.gogh.action.BoardUpdateSaveAction;
 import com.gogh.action.BoardUpdateViewAction;
-import com.gogh.action.CommentListAction;
 import com.gogh.action.CommentListAction2;
 import com.gogh.action.ConstractAction;
 import com.gogh.action.DownloadAction;
@@ -156,13 +149,6 @@ public class BzipollFrontController extends HttpServlet {
   			forward = action.excute(request, response);
   		}
 		
-		//게시판으로 이동하게 해준다.
-		else if(command.equals("/boardlist.bizpoll")) {
-			System.out.println("컨트롤러의 if - boardlist.bizpoll이 정상적으로 실행됩니다.");
-  			action = new BoardListAction();
-  			forward = action.excute(request, response);
-  		}
-		
 		else if(command.equals("/boardlist2.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardlist2.bizpoll이 정상적으로 실행됩니다.");
   			action = new BoardListAction2();
@@ -170,22 +156,9 @@ public class BzipollFrontController extends HttpServlet {
   		}
 		
 		//게시판에서 글쓰기 버튼을 누르면 글쓰는 창으로 이동한다.
-		else if(command.equals("/boardinsertview.bizpoll")) {
-			System.out.println("컨트롤러의 if - boardinsertview.bizpoll이 정상적으로 실행됩니다.");
-  			action = new BoardInsertViewAction();
-  			forward = action.excute(request, response);
-  		}
 		else if(command.equals("/boardinsertview2.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardinsertview2.bizpoll이 정상적으로 실행됩니다.");
   			action = new BoardInsertViewAction2();
-  			forward = action.excute(request, response);
-  		}
-		
-		
-		//게시판 글쓰기 페이지에서 submit을 누르면 디비에 값을 저장 시킴
-		else if(command.equals("/boardinsertsave.bizpoll")) {
-			System.out.println("컨트롤러의 if - boardinsertsave.bizpoll이 정상적으로 실행됩니다.");
-  			action = new BoardInsertSaveAction();
   			forward = action.excute(request, response);
   		}
 		
@@ -196,11 +169,6 @@ public class BzipollFrontController extends HttpServlet {
   			forward = action.excute(request, response);
   		}	
 		
-		else if(command.equals("/boarddetail.bizpoll")) {
-			System.out.println("컨트롤러의 if - boarddetail.bizpoll이 정상적으로 실행됩니다.");
-  			action = new BoardDetailAction();
-  			forward = action.excute(request, response);
-  		}
 		else if(command.equals("/boarddetail2.bizpoll")) {
 			System.out.println("컨트롤러의 if - boarddetail2.bizpoll이 정상적으로 실행됩니다.");
   			action = new BoardDetailAction2();
@@ -216,12 +184,6 @@ public class BzipollFrontController extends HttpServlet {
 		else if(command.equals("/boardupdatesave.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardupdatesave.bizpoll이 정상적으로 실행됩니다.");
   			action = new BoardUpdateSaveAction();
-  			forward = action.excute(request, response);
-  		}
-		
-		else if(command.equals("/boarddelete.bizpoll")) {
-			System.out.println("컨트롤러의 if - boarddelete.bizpoll이 정상적으로 실행됩니다.");
-  			action = new BoardDeleteAction();
   			forward = action.excute(request, response);
   		}
 		
@@ -243,21 +205,9 @@ public class BzipollFrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		}
 		
-		else if(command.equals("/boardsearch.bizpoll")) {
-			System.out.println("컨트롤러의 if - boardsearch.bizpoll이 정상적으로 실행됩니다.");
-			action = new BoardSearchAction();
-			forward = action.excute(request, response);
-		}
-		
 		else if(command.equals("/boardsearch2.bizpoll")) {
 			System.out.println("컨트롤러의 if - boardsearch2.bizpoll이 정상적으로 실행됩니다.");
 			action = new BoardSearchAction2();
-			forward = action.excute(request, response);
-		}
-		
-		else if(command.equals("/commentlist.bizpoll")) {
-			System.out.println("컨트롤러의 if - commentlist.bizpoll이 정상적으로 실행됩니다.");
-			action = new CommentListAction();
 			forward = action.excute(request, response);
 		}
 		

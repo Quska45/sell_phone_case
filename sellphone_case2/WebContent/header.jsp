@@ -39,8 +39,6 @@ body, ul {
      #header {
      	width: 100%;
      	top: 0;
-     	position: fixed;
-     	padding-bottom: 42px;
      	background-color: #f5f6f7;
      	clear: both;
      	z-index: 30; /* 우선순위를 줘서 위로 올라오게 하는 것 */
@@ -261,15 +259,16 @@ body, ul {
 	}
 	div#wrap {/* 안에 들어가는 컴텐츠 전체를 감싸는 div */
 		margin: 50px auto 0px;
-		border: 1px solid #dadada;
+		border: 1px solid black;
 		width: 464px;
-		height: 850px;
+		height: 520px;
+		background: #fff;
 	}
 	div#kakao_header {
 		position: relative;
 		height: 39px;
 		padding-top: 16px;
-		border-bottom: 1px solid #dadada;
+		border-bottom: 1px solid black;
 		overflow: hidden;/* 내용물이 넘치면 안보이게 하라는 것 */
 	}
 	
@@ -328,7 +327,7 @@ body, ul {
 		width: 270px;
 		height: 394px;
 		padding: 0 25px;
-		border: 1px solid #dadada;
+		border: 1px solid black;
 		text-align: left;
 		display: inline-block;
 	}
@@ -501,6 +500,7 @@ body, ul {
      
      
      div#myModal {
+     	position: fixed;
      	background-color:white;
      	border: 1px solid red;
      	right: 35%;
@@ -509,7 +509,6 @@ body, ul {
      }
      .modal {
 	    display: none; /* Hidden by default */
-	    position: fixed; /* Stay in place */
 	    z-index: 1; /* Sit on top */
 	    padding-top: 100px; /* Location of the box */
 	    left: 0;
@@ -526,6 +525,8 @@ body, ul {
      	right: 0;
      	top: 0;
      	cursor: pointer;
+     	font-size: 30px;
+   	 	padding-right: 12px;
      }
      /* 모달창 끝 */
      
@@ -599,8 +600,6 @@ body, ul {
 			dataType :  "JSON",
 			success: function(data){
 				if(data.flag=="1"){
-					alert("로그아웃 성공");
-					alert("data.flag" + data.flag);
 					//index.bizpoll을 띄우라는 것이다.
 					location.reload();
 				} else if(data.flag!="0"){
@@ -618,18 +617,28 @@ body, ul {
 		location.href="index.bizpoll";
 	});
 	
+	//마이페이지를 눌렀는데 로그인이 되어있지 않다면 모달창을 띄워주는 스크립트
+	$(document).on("click", "#header_mypage", function(){
+		if($("#sessionck").val()==""){
+			$("#myModal").css("display", "block");
+		} else if($("#sessionck").val()!="") {
+			location.href="mypage.bizpoll";
+		}
+		
+	});
+	
+
+
+	
 </script>
 </head>
 <body>
 <div id="header_wrap">
+<input type="hidden" id="sessionck" name="sessionck" value="${sessionScope.loginUser}">
 <div id="myModal" class="modal"><!-- 모달 창시작 -->
      <div id="wrap"><!-- 컨텐ㅊ트 전체를 감싸는 div -->
-	
 		<div id="kakao_header"><!-- 말그대로 헤더 -->
 		<span class="close">&times;</span>
-		float: left;
-		margin-left: 25px;
-		margin-top: 0;
 			<h1 style="float: left; margin-left: 25px; margin-top: 0;"><!-- 더 크게 만들어 준다. -->
 				<a id="kakao_logo" href="#">
 					<img src="image/case/vincent.png">
@@ -677,28 +686,6 @@ body, ul {
 				</div>
 			</div>
 		</div>
-		<div id="kakao_footer">
-			<img src="image/star.jpg">
-			<!-- <div id="footer_link">
-				<a href="#" class="link_info">공지사항</a>
-				<span class="txt_bar"></span>
-				<a href="#" class="link_info">이용약관</a>
-				<span class="txt_bar"></span>
-				<a href="#" class="link_info">개인정보 처리방침</a>
-				<span class="txt_bar"></span>
-				<a href="#" class="link_info">운영정책</a>
-				<span class="txt_bar"></span>
-				<span class="util_cont">
-				</span>
-			</div>
-			<div id="footer_info">
-				
-				<small class="txt_copyright">
-					Copyright ⓒ
-					<a href="#" class="link_kakao">Vincent Corp.</a>
-				</small>
-			</div> -->
-		</div>
 	</div>
 	</div><!-- 모달창 끝 -->
 <div id="header">
@@ -729,7 +716,7 @@ body, ul {
               	</c:choose>
                    
                    <li id="li_drop">
-                        <a href="mypage.bizpoll">마이페이지▼</a>
+                        <a id="header_mypage" href="#">마이페이지▼</a>
                         <div id="dropdown">
                              <ul>
                                   <li><a href="#">주문/배송조회</a></li>

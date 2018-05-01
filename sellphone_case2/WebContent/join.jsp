@@ -293,7 +293,7 @@
 			var year = $("#sel_year").val();
 			var month = $(".sel_month").val();
 			var day = $("#sel_day").val();
-			
+			var birth = year+"-"+month+"-"+day;
 			
 			//var idckval = $(#"idckval");
 			
@@ -502,7 +502,7 @@
                                                                      </div>
                                                                      <div class="bir_yy">
                                                                            <span class="ps_box">
-                                                                                  <input type="text" id="yy" id="sel_year" name="sel_year"  placeholder="년(4자)" class="int">
+                                                                                  <input type="text" id="sel_year"  name="sel_year"  placeholder="년(4자)" class="int">
                                                                                   <!-- <label id="yyLb" for="yy" class="1b1">년(4자)</label> -->
                                                                             </span>
                                                                      </div>
@@ -510,26 +510,26 @@
                                                                      <div class="bir_mm">
                                                                            <span class="ps_box">
                                                                                   <select id="mm" title="월" class="sel_month" onchange="checkBirthday('check')">
-                                                                                         <option value>월</option>
-                                                                                         <option value>1</option>
-                                                                                         <option value>2</option>
-                                                                                         <option value>3</option>
-                                                                                         <option value>4</option>
-                                                                                         <option value>5</option>
-                                                                                         <option value>6</option>
-                                                                                         <option value>7</option>
-                                                                                         <option value>8</option>
-                                                                                         <option value>9</option>
-                                                                                         <option value>10</option>
-                                                                                         <option value>11</option>
-                                                                                         <option value>12</option>
+                                                                                         <option>월</option>
+                                                                                         <option>1</option>
+                                                                                         <option>2</option>
+                                                                                         <option>3</option>
+                                                                                         <option>4</option>
+                                                                                         <option>5</option>
+                                                                                         <option>6</option>
+                                                                                         <option>7</option>
+                                                                                         <option>8</option>
+                                                                                         <option>9</option>
+                                                                                         <option>10</option>
+                                                                                         <option>11</option>
+                                                                                         <option>12</option>
                                                                                   </select>
                                                                             </span>
                                                                      </div>
                                                                      <span class="cell"><!-- | --></span>
                                                                      <div class="bir_dd">
                                                                            <span class="ps_box">
-                                                                                  <input type="text" id="dd" id="sel_day" placeholder="일" class="int">
+                                                                                  <input type="text" id="sel_day" name="sel_day"  placeholder="일" class="int">
                                                                             </span>
                                                                      </div>
                                                               </div>

@@ -28,8 +28,7 @@
 		width: 50%;
 		height: 5%;
 	}
-	#container {
-		margin: 0 30px;
+	.container {
 	}
 	.footer_logo {
 		text-align: center;

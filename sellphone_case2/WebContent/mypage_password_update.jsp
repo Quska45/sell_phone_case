@@ -30,7 +30,7 @@ a {
 	text-decoration: none;
 }
 #page1 {
-	margin-top: 400px;
+	margin-top: 150px;
 }
 #page2 {
 	width: 1100px;
@@ -125,7 +125,6 @@ $(document).on("click", ".password_update_ok_btn", function(){
 	var new_pw = $("#new_password").val();
 	var new_confirm_pw = $("#new_password_confirm").val();
 	var id = ${sessionScope.loginUser.mid}; 
-	alert("test");
 	
 	if(old_pw == ""){
 		$(".Old_Err_ck").text("현재 비밀번호가 입력되지 않았습니다.").css("display", "block").css("color", "red");

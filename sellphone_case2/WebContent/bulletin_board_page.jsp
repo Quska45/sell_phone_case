@@ -38,7 +38,7 @@ a {
 	text-decoration: none;
 }
 #page1 {
-	margin-top: 400px;
+	margin-top: 150px;
 }
 #page2 {
 	width: 1100px;
@@ -318,7 +318,7 @@ a {
 						<a href="#" id="bbp_modify" name="bbp_modify">수정</a>
 						<a href="#" id="bbp_delete" name="bbp_delete">삭제</a>
 					</c:if>
-					<a href="#" id="bbp_list" name="bbp_list">목록</a>
+					<a href="boardlist2.bizpoll" id="bbp_list" name="bbp_list">목록</a>
 					<c:choose>
 						<c:when test="${empty sessionScope.loginUser}">
 							<a href="#" id="bbp_answer_null" name="bbp_answer_null">답변</a>
@@ -327,7 +327,7 @@ a {
 							<a href="answer.bizpoll?bno=${boardview.bno}" id="bbp_answer" name="bbp_answer">답변</a>
 						</c:otherwise>
 					</c:choose>
-					<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i>${boardview.goodcnt}</a>
+					<a href="#" id="bbp_favorite" name="bbp_favorite">좋아요<i class="fa fa-thumbs-o-up"></i></a>
 					<span>${replycount}</span>
 				</div>
 				
@@ -335,24 +335,21 @@ a {
 					<div class="reply_item">
 						
 						<div id="commentList"></div>
-						
+						 
 						
 						<!-- 댓글을 입력하는 부분이 있는 div -->
 						<div>
-							<form>
 								<input type="hidden" id="reply_bno" name="reply_bno" value="${boardview.bno}">
 								<c:choose>
 									<c:when test="${sessionScope.loginUser.mid != null}">
 										<input id="reply_writer" name="reply_writer" value="${sessionScope.loginUser.mid}" readonly="readonly" style="width: 80px; text-align: center;">
 										<div><textarea id="reply_con" name="reply_con" placeholder="댓글을 입력하세요"></textarea></div>
-										<a href="#" id="comment_insert">입력</a>
+										<button id="comment_insert">입력</button>
 									</c:when>
 									<c:otherwise>
 										<a id="bbp_login" href="#" style="color: blue;">로그인</a>을 하시면 댓글을 작성할 수 있습니다.
 									</c:otherwise>
 								</c:choose>
-								
-							</form>
 						</div>
 					</div>
 				</div>

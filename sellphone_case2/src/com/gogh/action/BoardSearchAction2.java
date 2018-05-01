@@ -22,8 +22,8 @@ public class BoardSearchAction2 implements Action{
 		String url = "bulletin_board.jsp";
 		
 		//
-		String flag = request.getParameter("flag");
-		String keyword = request.getParameter("keyword");
+		String flag = request.getParameter("selsearch");
+		String keyword = request.getParameter("search_input");
 		System.out.println(flag + ", " + keyword);
 		
 		//여기에는 페이지의 번호와 한 페이지에 보여줄 게시글의 개수가 담긴다.

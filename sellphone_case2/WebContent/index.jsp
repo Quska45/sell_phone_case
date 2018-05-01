@@ -60,7 +60,7 @@
      h2.new_product_title {
      	display: inline-block;
      	left: 550px;
-     	padding: 0 155px;
+     	padding: 0 150px;
      	font-family: 'Jeju Gothic', sans-serif;
      }
      hr#hr_after { /* new product container에서 구분선 역할을 하는 hr */
@@ -112,7 +112,7 @@
      	float: left;
      }
      .item_list{
-     	height: 950px;
+     	height: 1030px;
      }
      
      
@@ -125,7 +125,7 @@
 <body>
 
 <!-- 배너 -->
-<div style="margin-top:400px; margin-bottom: 30px;">
+<div style="margin-top:100px; margin-bottom: 30px;">
 		<div style="text-align: center; width: 1315px; margin: 0 auto;">
 				<img class="img_banner" src="image/case/picture01.jpg" style="height: 371px;">
 				<img class="img_banner" src="image/case/picture02.jpg" style="height: 371px;">
@@ -139,7 +139,7 @@
 	<div id="container"> <!-- 구분선이 되는 div -->
 		<hr id="hr_before">
 		<h2 style="font-weight: normal" class="new_product_title">
-			<b>New</b>
+			<b>Main</b>
 			"PRODUCT"</b>
 		</h2>
 		<hr id="hr_after">
@@ -419,9 +419,10 @@
 		</div>
 	</div>
 	
-	<div id="list_wrap">
+	<table id="list_wrap">
+		<tr>
 	<c:forEach items="${newProductList}" var="pDto">
-		<div class="pdt_item">
+		<td class="pdt_item">
 			<a href="">
 				<img alt="신상품" src="image/case/${pDto.p_img}" width="200px" height="200px">
 				<div class="wrap_info">
@@ -432,16 +433,17 @@
 					</span>
 				</div>
 			</a>
-		</div>
+		</td>
 	</c:forEach>
-	</div>
+		</tr>
+	</table>
 	
 	<!-- new product container -->
-	<div style="margin-bottom: 30px; margin-top: 350px;">
+	<div style="margin-bottom: 30px; margin-top: 100px;">
 		<div id="container"> <!-- 구분선이 되는 div -->
 			<hr id="hr_before">
 			<h2 style="font-weight: normal" class="new_product_title">
-				<b>New</b>
+				<b>Best</b>
 				"PRODUCT"</b>
 			</h2>
 			<hr id="hr_after">

@@ -30,7 +30,7 @@ a {
 	text-decoration: none;
 }
 #page1 {
-	margin-top: 400px;
+	margin-top: 150px;
 }
 #page2 {
 	width: 1100px;

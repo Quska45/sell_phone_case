@@ -35,7 +35,7 @@ a {
 	text-decoration: none;
 }
 #page1 {
-	margin-top: 400px;
+	margin-top: 150px;
 }
 #page2 {
 	width: 1100px;
@@ -190,22 +190,7 @@ a {
 	
 	//검색 버튼을 눌렀을 때 검색을 시작함.
 	$(document).on("click", "#searchbtn", function(){
-		var flag = $("#selsearch").val();
-		var keyword = $("#search_input").val();
-
-		$.ajax({
-			url: "boardsearch2.bizpoll",
-			type: "POST",
-			dataType :  "JSON",
-			data: "flag=" + flag + "&keyword=" + keyword,
-			success: (function(data){
-				alert("댓글 삭제 성공");
-			}),
-			error: function(){
-				alert("system error");
-			}
-		});
-	
+		$("#search_form").submit();
 	});
 	
 	//글쓰기를 누를 때 로그인 모달 창이 뜨게 한다.
@@ -247,18 +232,19 @@ a {
 				
 				<!-- 검색 입력란 -->
 				<div id="clearfix">
-					<div id="board_top_right">
-						<select id="selsearch" name="selsearch">
-							<option>직접입력</option>
-							<option>제목</option>
-							<option>내용</option>
-							<option>제목 + 내용</option>
-							<option>작성자</option>
-						</select>
-						<input id="search_input" name="search_input" placeholder="검색어를 입력하세요"></input>
-						<a href="#" id="searchbtn">검색</a>
-					</div>
-					
+					<form action="boardsearch2.bizpoll" id="search_form" name="search_form" method="get">
+						<div id="board_top_right">
+							<select id="selsearch" name="selsearch">
+								<option>직접입력</option>
+								<option>제목</option>
+								<option>내용</option>
+								<option>제목 + 내용</option>
+								<option>작성자</option>
+							</select>
+							<input id="search_input" name="search_input" placeholder="검색어를 입력하세요"></input>
+							<a href="#" id="searchbtn">검색</a>
+						</div>
+					</form>
 					<select id="board_top_left_selbox">
 						<option>선택</option>
 						<option>최신순</option>

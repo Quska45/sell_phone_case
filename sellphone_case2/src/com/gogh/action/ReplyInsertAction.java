@@ -45,8 +45,6 @@ public class ReplyInsertAction implements Action{
 			System.out.println("등록 실패");
 		}
 		
-		request.setAttribute("bno", bno);
-		
 		//0이면 등록이 된 것이다.
 		int flag=0;
 		

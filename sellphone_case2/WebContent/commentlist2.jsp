@@ -21,7 +21,7 @@
 					<li>
 						<span>작성자 : ${replyview.writer}</span>
 						<span>${replyview.regdate}</span>
-						<a href="#" class="relpy_del" data_num="${replyview.rno}">삭제</a>
+						<button class="relpy_del" data_num="${replyview.rno}">삭제</button>
 					</li>
 					
 				</ul>
