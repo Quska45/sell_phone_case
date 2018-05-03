@@ -316,7 +316,7 @@ a {
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 								<!-- c:out은 해당 번호에 페이지를 띄웠을 때 변화를 주기 위한 것이다. 변하는 것은 active를 통해 값이 참이었을 때 실행되는 것이다. -->
 								<li <c:out value="${pageMaker.criDto.page == idx? 'class=active':''}"/>>
-								<a href="boardlistsort.bizpoll?page=${idx}">${idx}</a></li>
+								<a href="boardlist2.bizpoll?page=${idx}">${idx}</a></li>
 							</c:forEach>
 								
 							</li>
