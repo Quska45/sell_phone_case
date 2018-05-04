@@ -585,7 +585,6 @@ body, ul {
 					alert("로그인실패");
 					$("#login_id").select();
 					$("#ErrCk").css("display", "block");
-					
 				}
 			}),
 			error: function(){
