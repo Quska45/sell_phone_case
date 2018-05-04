@@ -180,6 +180,7 @@ body, ul {
      
      #category {
      /* 세번째 줄 */
+     	  min-width: 1000px;
      	  width: 1500px;
           height: 40px;
           margin: 0 auto;

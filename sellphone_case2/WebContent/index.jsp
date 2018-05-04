@@ -107,6 +107,7 @@
      /* New ITEM / BEST ITEM 시작 */
      #list_wrap {
 	margin-left: 25%;
+	min-width: 1200px;
      }
      .pdt_item {
      	float: left;
